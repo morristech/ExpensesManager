@@ -1,7 +1,7 @@
 {
   "host": "localhost",
   "port": 3030,
-  "postgres": "postgres://postgres:@localhost:5432/toptalServer",
+  "postgres": "postgres://@localhost:5432/toptalserver",
   "public": "../public/",
   "auth": {
     "idField": "id",
