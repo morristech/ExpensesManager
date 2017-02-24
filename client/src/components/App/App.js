@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
 // Import bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,11 +18,10 @@ class App extends React.Component {
               <Link to="/">React-Bootstrap</Link>
             </Navbar.Brand>
           </Navbar.Header>
-          <Nav>
-            <NavItem><Link to="expenses">My Expenses</Link></NavItem>
-          </Nav>
         </Navbar>
-        {this.props.children}
+        <div className="container">
+          {this.props.children}
+        </div>
       </div>
     );
   }
