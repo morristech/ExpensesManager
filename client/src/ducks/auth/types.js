@@ -9,4 +9,4 @@ export default {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
-}
+};

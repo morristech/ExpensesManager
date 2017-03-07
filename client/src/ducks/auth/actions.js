@@ -7,17 +7,17 @@ const loginRequest = (username, password) => {
       username,
       password
     }
-  }
-}
+  };
+};
 
 
 const logout = () => {
   return {
     type: types.LOGOUT
-  }
-}
+  };
+};
 
 export default {
   loginRequest,
   logout,
-}
+};

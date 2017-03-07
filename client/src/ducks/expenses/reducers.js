@@ -9,7 +9,7 @@ export default function expensesReducer(state = initialState, action) {
       return {
         ...state,
         expenses: state.expenses.slice().push(action.payload)
-      }
+      };
     default:
       return state;
   }

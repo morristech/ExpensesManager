@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, IndexLink } from 'react-router';
+import { Link } from 'react-router';
 import { Nav, NavItem, Navbar } from 'react-bootstrap';
 
 const Topbar = (auth) => {
@@ -22,6 +22,6 @@ const Topbar = (auth) => {
       }
     </Navbar>
   );
-}
+};
 
 export default Topbar;

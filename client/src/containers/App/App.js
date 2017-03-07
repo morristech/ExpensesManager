@@ -14,7 +14,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Topbar loggedIn={this.props.loggedIn} />
+        <Topbar loggedIn={this.props.auth.loggedIn} />
         <div className="container">
           {this.props.children}
         </div>
@@ -24,7 +24,8 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
+  auth: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
