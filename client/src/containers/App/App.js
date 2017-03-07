@@ -10,7 +10,7 @@ import Topbar from '../../components/Topbar/Topbar';
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
 // component at the top-level.
-export const App = (props) => {
+const App = (props) => {
   return (
     <div>
       <Topbar auth={props.auth} />
@@ -28,14 +28,14 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { auth: state.auth }
+  return { auth: state.auth };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     actions: bindActionCreators(authActions, dispatch)
   };
-}
+};
 
 export default connect(
   mapStateToProps,

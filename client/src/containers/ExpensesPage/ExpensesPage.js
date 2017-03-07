@@ -5,7 +5,7 @@ import { Table } from 'react-bootstrap';
 
 import { expensesActions } from '../../ducks/expenses';
 
-export const ExpensesPage = (props) => {
+const ExpensesPage = (props) => {
   return (
     <Table striped bordered condensed hover>
       <thead>
@@ -18,7 +18,7 @@ export const ExpensesPage = (props) => {
       </thead>
       <tbody>
         {props.expenses.map(item =>
-          <tr>
+          <tr key={item.id}>
             <td>{item.datetime}</td>
             <td>{item.description}</td>
             <td>{item.comment}</td>
