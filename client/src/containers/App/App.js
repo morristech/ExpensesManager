@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink } from 'react-router';
-import { Navbar } from 'react-bootstrap';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 // Import bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Topbar from '../../components/Topbar/Topbar';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -12,13 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">React-Bootstrap</Link>
-            </Navbar.Brand>
-          </Navbar.Header>
-        </Navbar>
+        <Topbar loggedIn={this.props.loggedIn} />
         <div className="container">
           {this.props.children}
         </div>
@@ -31,4 +26,18 @@ App.propTypes = {
   children: PropTypes.element
 };
 
-export default App;
+function mapStateToProps(state) {
+  return state.auth;
+}
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     actions: bindActionCreators(expensesActions, dispatch)
+//   };
+// }
+
+export default connect(
+  mapStateToProps,
+  null
+)(App);
+
