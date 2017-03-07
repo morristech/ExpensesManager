@@ -27,7 +27,9 @@ LoginPage.propTypes = {
   auth: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => state.auth;
+const mapStateToProps = state => {
+  return {auth: state.auth };
+};
 
 function mapDispatchToProps(dispatch) {
   return {

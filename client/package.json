@@ -31,6 +31,8 @@
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "feathers-client": "^1.9.0",
+    "feathers-reduxify-authentication": "^0.1.1",
     "react": "15.4.1",
     "react-bootstrap": "^0.30.7",
     "react-dom": "15.4.1",
@@ -38,6 +40,7 @@
     "react-router": "3.0.0",
     "react-router-redux": "4.0.7",
     "redux": "3.6.0",
+    "redux-actions": "^2.0.1",
     "redux-logger": "^2.8.2",
     "redux-thunk": "2.1.0"
   },

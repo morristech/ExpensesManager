@@ -15,10 +15,10 @@ const Topbar = (auth, logout) => {
           <NavItem onClick={logout}>Logout</NavItem>
         </Nav>
       :
-        <Nav pullRight>
+        <ul className="nav navbar-nav navbar-right">
           <li><Link to="/register">Register</Link></li>
           <li><Link to="/login">Login</Link></li>
-        </Nav>
+        </ul>
       }
     </Navbar>
   );

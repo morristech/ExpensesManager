@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 // Import bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { authActions } from '../../ducks/auth';
 import Topbar from '../../components/Topbar/Topbar';
 
 // This is a class-based component because the current
@@ -13,7 +12,7 @@ import Topbar from '../../components/Topbar/Topbar';
 const App = (props) => {
   return (
     <div>
-      <Topbar auth={props.auth} logout={props.actions.logout} />
+      <Topbar auth={props.auth} />
       <div className="container">
         {props.children}
       </div>
@@ -23,7 +22,7 @@ const App = (props) => {
 
 App.propTypes = {
   children: PropTypes.element,
-  actions: PropTypes.object.isRequired,
+  // actions: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
 };
 
@@ -31,14 +30,14 @@ const mapStateToProps = state => {
   return { auth: state.auth };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: bindActionCreators(authActions, dispatch)
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     actions: bindActionCreators(authActions, dispatch)
+//   };
+// };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,// mapDispatchToProps,
 )(App);
 
