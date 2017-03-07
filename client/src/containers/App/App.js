@@ -13,7 +13,7 @@ import Topbar from '../../components/Topbar/Topbar';
 const App = (props) => {
   return (
     <div>
-      <Topbar auth={props.auth} />
+      <Topbar auth={props.auth} logout={props.actions.logout} />
       <div className="container">
         {props.children}
       </div>

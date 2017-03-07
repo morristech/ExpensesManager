@@ -2,22 +2,22 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Nav, NavItem, Navbar } from 'react-bootstrap';
 
-const Topbar = (auth) => {
+const Topbar = (auth, logout) => {
   return (
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/">React-Bootstrap</Link>
+          <Link to="/">Expenses Manager</Link>
         </Navbar.Brand>
       </Navbar.Header>
       {auth.loggedIn ?
         <Nav pullRight>
-          <NavItem eventKey={1} href="#">Logout</NavItem>
+          <NavItem onClick={logout}>Logout</NavItem>
         </Nav>
       :
         <Nav pullRight>
-          <NavItem eventKey={1} href="#">Register</NavItem>
-          <NavItem eventKey={1} href="#">Login</NavItem>
+          <li><Link to="/register">Register</Link></li>
+          <li><Link to="/login">Login</Link></li>
         </Nav>
       }
     </Navbar>
