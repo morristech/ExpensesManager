@@ -41,9 +41,7 @@ ExpensesPage.propTypes = {
   expenses: PropTypes.array.isRequired,
 };
 
-function mapStateToProps(state) {
-  return state.expenses;
-}
+const mapStateToProps = state => state.expenses;
 
 function mapDispatchToProps(dispatch) {
   return {
