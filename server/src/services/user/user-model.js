@@ -28,10 +28,16 @@ module.exports = function(sequelize) {
       defaultValue: 'user'
     }
   }, {
-    freezeTableName: true
+    freezeTableName: true,
+    // Define Relationships
+    // https://github.com/feathersjs/feathers-sequelize/issues/20
+    classMethods: {
+      associate(models) {
+        console.log(models)
+        user.hasMany(models.expenses);
+      }
+    }
   });
-
-  user.sync();
 
   return user;
 };
