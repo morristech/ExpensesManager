@@ -9,6 +9,7 @@ exports.before = {
     auth.verifyToken(),
     auth.populateUser(),
     auth.restrictToAuthenticated(),
+    auth.queryWithCurrentUser(),
   ],
   find: [],
   get: [
@@ -19,11 +20,9 @@ exports.before = {
   ],
   update: [
     auth.restrictToOwner(),
-    auth.associateCurrentUser(),
   ],
   patch: [
     auth.restrictToOwner(),
-    auth.associateCurrentUser(),
   ],
   remove: [
     auth.restrictToOwner(),
