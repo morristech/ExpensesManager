@@ -10,6 +10,11 @@ const Topbar = ({ auth, logout }) => {
           <Link to="/">Expenses Manager</Link>
         </Navbar.Brand>
       </Navbar.Header>
+      {auth.isLoggedIn &&
+        <ul className="nav navbar-nav">
+          <li><Link to="/expenses">Dashboard</Link></li>
+        </ul>
+      }
       {auth.isLoggedIn ?
         <Nav pullRight>
           <NavItem onClick={logout}>Logout</NavItem>
