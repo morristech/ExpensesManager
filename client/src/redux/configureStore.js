@@ -1,5 +1,7 @@
 import {createStore, compose, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { browserHistory } from 'react-router';
+import { routerMiddleware } from 'react-router-redux'
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import persistState from 'redux-localstorage';
@@ -15,12 +17,15 @@ function configureStoreProd(initialState) {
   const middlewares = [
     // Add other middleware on this line...
 
+    // Bind react-router with redux
+    routerMiddleware(browserHistory),
+
     // Sagas
     sagaMiddleware,
 
     // thunk middleware can also accept an extra argument to be passed to each thunk action
     // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
-    thunk,
+    // thunk,
   ];
 
   const store = createStore(rootReducer, initialState, compose(
@@ -40,6 +45,9 @@ function configureStoreDev(initialState) {
   const middlewares = [
     // Add other middleware on this line...
 
+    // Bind react-router with redux
+    routerMiddleware(browserHistory),
+
     // Sagas
     sagaMiddleware,
 
@@ -48,7 +56,7 @@ function configureStoreDev(initialState) {
 
     // thunk middleware can also accept an extra argument to be passed to each thunk action
     // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
-    thunk,
+    // thunk,
 
     // redux-logger console.logs all redux actions
     createLogger(),

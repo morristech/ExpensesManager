@@ -12,8 +12,9 @@ function handleSubmit(values, dispatch) {
 }
 
 class LoginPage extends React.Component {
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isLoggedIn) { // true after successful submit
+
+  componentWillMount() {
+    if (this.props.auth.isLoggedIn) { // true after successful submit
       this.props.handleRedirect();
     }
   }
