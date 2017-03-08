@@ -26,6 +26,18 @@ function* fetchExpensesSaga(action) {
   }
 }
 
+function* updateExpenseSaga(action) {
+  try {
+    const token = yield select(state => state.auth.user.token);
+    const response = yield call(ApiService, `expenses/${action.payload.id}`, 'PATCH', action.payload.body, token);
+    // Fetch all expenses to update table of expenses
+    yield put({ type: types.FETCH_EXPENSES_REQUEST });
+    yield put({ type: types.UPDATE_EXPENSE_SUCCESS });
+  } catch (error) {
+    yield put({ type: types.UPDATE_EXPENSE_FAILURE, error });
+  }
+}
+
 function* deleteExpenseSaga(action) {
   try {
     const token = yield select(state => state.auth.user.token);
@@ -42,6 +54,7 @@ export default function* expensesSaga() {
   yield [
     takeLatest(types.CREATE_EXPENSE_REQUEST, createExpenseSaga),
     takeLatest(types.FETCH_EXPENSES_REQUEST, fetchExpensesSaga),
+    takeLatest(types.UPDATE_EXPENSE_REQUEST, updateExpenseSaga),
     takeLatest(types.DELETE_EXPENSE_REQUEST, deleteExpenseSaga),
   ];
 }

@@ -56,6 +56,13 @@ class ExpensesPage extends React.Component {
             <form
               onSubmit={e => {e.preventDefault(); handleSubmit(e)}}
             >
+              <Field
+                name="id"
+                component="input"
+                type="hidden"
+              />
+              <br />
+
               <label>Date:</label>
               <Field
                 name="datetime"
@@ -110,7 +117,7 @@ class ExpensesPage extends React.Component {
                   disabled={invalid || submitting}
                   type="submit"
                 >
-                  {submitting ? 'Updating...' : 'Add new expense'}
+                  {submitting ? 'Updating...' : 'Submit'}
                 </Button>
               </div>
 

@@ -7,6 +7,7 @@ const initialState = {
 export default function expensesReducer(state = initialState, action) {
   switch (action.type) {
     case types.CREATE_EXPENSE_SUCCESS:
+    case types.UPDATE_EXPENSE_SUCCESS:
       return {
         ...state,
         showingModal: false,
