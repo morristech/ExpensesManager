@@ -1,27 +1,44 @@
 import {createStore, compose, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
+
 import rootReducer from './reducer';
+import rootSaga from './sagas';
+
+// Initialize the Saga middleware to run sagas
+const sagaMiddleware = createSagaMiddleware();
 
 function configureStoreProd(initialState) {
   const middlewares = [
     // Add other middleware on this line...
+
+    // Sagas
+    sagaMiddleware,
 
     // thunk middleware can also accept an extra argument to be passed to each thunk action
     // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
     thunk,
   ];
 
-  return createStore(rootReducer, initialState, compose(
+  const store = createStore(rootReducer, initialState, compose(
     applyMiddleware(...middlewares)
     )
   );
+
+  // Run all sagas
+  sagaMiddleware.run(rootSaga);
+
+  return store;
 }
 
 function configureStoreDev(initialState) {
   const middlewares = [
     // Add other middleware on this line...
+
+    // Sagas
+    sagaMiddleware,
 
     // Redux middleware that spits an error on you when you try to mutate your state either inside a dispatch or between dispatches.
     reduxImmutableStateInvariant(),
@@ -39,6 +56,10 @@ function configureStoreDev(initialState) {
     applyMiddleware(...middlewares)
     )
   );
+
+  // Run all sagas
+  sagaMiddleware.run(rootSaga);
+
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
