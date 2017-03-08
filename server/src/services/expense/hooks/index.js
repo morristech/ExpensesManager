@@ -8,11 +8,14 @@ exports.before = {
   all: [
     auth.verifyToken(),
     auth.populateUser(),
-    auth.restrictToAuthenticated()
+    auth.restrictToAuthenticated(),
+    auth.associateCurrentUser(),
   ],
   find: [],
   get: [],
-  create: [],
+  create: [
+
+  ],
   update: [],
   patch: [],
   remove: []

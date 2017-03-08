@@ -1,9 +1,14 @@
 import types from './types';
 
-const addExpense = expense => {
+const createExpense = (datetime, description, comment, amount) => {
   return {
-    type: types.ADD_EXPENSE,
-    payload: expense
+    type: types.CREATE_EXPENSE_REQUEST,
+    payload: {
+      datetime,
+      description,
+      comment,
+      amount
+    }
   };
 };
 
@@ -20,7 +25,7 @@ const hideModal = () => {
 }
 
 export default {
-  addExpense,
+  createExpense,
   showModal,
   hideModal,
 };

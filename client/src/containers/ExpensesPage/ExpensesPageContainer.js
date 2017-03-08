@@ -12,7 +12,7 @@ ExpensesPage.propTypes = {
 };
 
 const handleSubmit = (values, dispatch) => {
-  dispatch(expensesActions.addExpense(values.date, values.description, values.comment, values.amount))
+  dispatch(expensesActions.createExpense(values.datetime, values.description, values.comment, values.amount))
 }
 
 const mapStateToProps = state => state.expenses;

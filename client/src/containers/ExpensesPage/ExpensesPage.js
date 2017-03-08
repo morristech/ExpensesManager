@@ -50,21 +50,21 @@ const ExpensesPage = ({ expenses, showingModal, actions, invalid, submitting, ha
           <form
             onSubmit={e => {e.preventDefault(); handleSubmit(e)}}
           >
-            <label for="date">Date:</label>
+            <label>Date:</label>
             <Field
-              name="date"
+              name="datetime"
               className="form-control"
               component={props => <DateTime
-                inputProps={ {name: 'date'} }
+                inputProps={ {name: 'datetime'} }
                 value={props.input.value}
                 onChange={param => props.input.onChange(param)}
               />}
-              placeholder="Date"
+              placeholder="Date & Time"
               required
             />
             <br />
 
-            <label for="description">Description:</label>
+            <label>Description:</label>
             <Field
               name="description"
               className="form-control"
@@ -75,7 +75,7 @@ const ExpensesPage = ({ expenses, showingModal, actions, invalid, submitting, ha
             />
             <br />
 
-            <label for="comment">Comment:</label>
+            <label>Comment:</label>
             <Field
               name="comment"
               className="form-control"
@@ -86,7 +86,7 @@ const ExpensesPage = ({ expenses, showingModal, actions, invalid, submitting, ha
             />
             <br />
 
-            <label for="amount">Amount in dollars:</label>
+            <label>Amount in dollars:</label>
             <Field
               name="amount"
               className="form-control"
