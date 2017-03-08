@@ -10,6 +10,16 @@ const loginRequest = (email, password) => {
   };
 };
 
+const registerRequest = (email, password) => {
+  return {
+    type: types.REGISTER_REQUEST,
+    payload: {
+      email,
+      password,
+    }
+  };
+};
+
 const logout = () => {
   return {
     types: types.LOGOUT
@@ -18,5 +28,6 @@ const logout = () => {
 
 export default {
   loginRequest,
+  registerRequest,
   logout
 };

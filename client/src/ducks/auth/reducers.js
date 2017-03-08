@@ -12,6 +12,12 @@ export default function expensesReducer(state = initialState, action) {
         isLoggedIn: true,
         user: action.payload
       };
+    case types.REGISTER_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        user: action.payload
+      };
     case types.LOGOUT:
       return {
         ...state,
