@@ -9,16 +9,25 @@ exports.before = {
     auth.verifyToken(),
     auth.populateUser(),
     auth.restrictToAuthenticated(),
-    auth.associateCurrentUser(),
   ],
   find: [],
-  get: [],
-  create: [
-
+  get: [
+    auth.restrictToOwner(),
   ],
-  update: [],
-  patch: [],
-  remove: []
+  create: [
+    auth.associateCurrentUser(),
+  ],
+  update: [
+    auth.restrictToOwner(),
+    auth.associateCurrentUser(),
+  ],
+  patch: [
+    auth.restrictToOwner(),
+    auth.associateCurrentUser(),
+  ],
+  remove: [
+    auth.restrictToOwner(),
+  ]
 };
 
 exports.after = {

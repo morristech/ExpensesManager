@@ -11,11 +11,12 @@ export default function request(endpoint, method = 'GET', body, token) {
     headers.Authorization = `Bearer ${token}`;
   }
 
-  return fetch(`${BASE_URL}/${endpoint}`, {
-    method,
-    headers,
-    body: JSON.stringify(body),
-  })
+  const options = { method, headers };
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
+
+  return fetch(`${BASE_URL}/${endpoint}`, options)
   .then((response) => {
     if (response.status >= 200 && response.status < 300) {
       return response;

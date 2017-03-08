@@ -12,6 +12,12 @@ const createExpense = (datetime, description, comment, amount) => {
   };
 };
 
+const fetchExpenses = () => {
+  return {
+    type: types.FETCH_EXPENSES_REQUEST,
+  };
+};
+
 const showModal = () => {
   return {
     type: types.SHOW_MODAL
@@ -26,6 +32,7 @@ const hideModal = () => {
 
 export default {
   createExpense,
+  fetchExpenses,
   showModal,
   hideModal,
 };

@@ -6,10 +6,15 @@ const initialState = {
 };
 export default function expensesReducer(state = initialState, action) {
   switch (action.type) {
-    case types.ADD_EXPENSE:
+    case types.CREATE_EXPENSE_SUCCESS:
       return {
         ...state,
-        expenses: state.expenses.slice().push(action.payload)
+        showingModal: false,
+      };
+    case types.FETCH_EXPENSES_SUCCESS:
+      return {
+        ...state,
+        expenses: action.payload
       };
     case types.SHOW_MODAL:
       return {
