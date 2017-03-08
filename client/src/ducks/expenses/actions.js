@@ -18,6 +18,13 @@ const fetchExpenses = () => {
   };
 };
 
+const deleteExpense = expenseId => {
+  return {
+    type: types.DELETE_EXPENSE_REQUEST,
+    payload: expenseId,
+  };
+};
+
 const showModal = () => {
   return {
     type: types.SHOW_MODAL
@@ -33,6 +40,7 @@ const hideModal = () => {
 export default {
   createExpense,
   fetchExpenses,
+  deleteExpense,
   showModal,
   hideModal,
 };

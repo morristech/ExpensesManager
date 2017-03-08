@@ -21,6 +21,7 @@ class ExpensesPage extends React.Component {
               <th>Description</th>
               <th>Comment</th>
               <th>Amount</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -30,6 +31,10 @@ class ExpensesPage extends React.Component {
                 <td>{item.description}</td>
                 <td>{item.comment}</td>
                 <td>{item.amount}</td>
+                <th>
+                  <Button className="btn-xs">Edit</Button>
+                  <Button className="btn-xs" onClick={() => actions.deleteExpense(item.id)}>Delete</Button>
+                </th>
               </tr>
             )}
           </tbody>

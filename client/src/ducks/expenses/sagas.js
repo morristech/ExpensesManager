@@ -26,9 +26,22 @@ function* fetchExpensesSaga(action) {
   }
 }
 
+function* deleteExpenseSaga(action) {
+  try {
+    const token = yield select(state => state.auth.user.token);
+    const response = yield call(ApiService, `expenses/${action.payload}`, 'DELETE', null, token);
+    // Fetch all expenses to update table of expenses
+    yield put({ type: types.FETCH_EXPENSES_REQUEST });
+    yield put({ type: types.DELETE_EXPENSE_SUCCESS });
+  } catch (error) {
+    yield put({ type: types.DELETE_EXPENSE_FAILURE, error });
+  }
+}
+
 export default function* expensesSaga() {
   yield [
     takeLatest(types.CREATE_EXPENSE_REQUEST, createExpenseSaga),
     takeLatest(types.FETCH_EXPENSES_REQUEST, fetchExpensesSaga),
+    takeLatest(types.DELETE_EXPENSE_REQUEST, deleteExpenseSaga),
   ];
 }
