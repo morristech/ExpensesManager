@@ -22,7 +22,7 @@ const registerRequest = (email, password) => {
 
 const logout = () => {
   return {
-    types: types.LOGOUT
+    type: types.LOGOUT
   };
 }
 
