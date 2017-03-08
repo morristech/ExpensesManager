@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Button, Modal } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Form, Field, initialize } from 'redux-form';
 import DateTime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 
@@ -32,7 +32,7 @@ class ExpensesPage extends React.Component {
                 <td>{item.comment}</td>
                 <td>{item.amount}</td>
                 <th>
-                  <Button className="btn-xs">Edit</Button>
+                  <Button className="btn-xs" onClick={() => { this.props.dispatch(initialize('ExpensesForm', item)); actions.showModal();} }>Edit</Button>
                   <Button className="btn-xs" onClick={() => actions.deleteExpense(item.id)}>Delete</Button>
                 </th>
               </tr>
@@ -43,7 +43,7 @@ class ExpensesPage extends React.Component {
         <Button
           className="pull-right"
           bsStyle="primary"
-          onClick={actions.showModal}
+          onClick={() => { this.props.dispatch(initialize('ExpensesForm', {})); actions.showModal(); }}
         >
           Add new expense
         </Button>
