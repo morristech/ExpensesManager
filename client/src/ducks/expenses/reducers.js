@@ -1,7 +1,8 @@
 import types from './types';
 
 const initialState = {
-  expenses: []
+  expenses: [],
+  showingModal: false,
 };
 export default function expensesReducer(state = initialState, action) {
   switch (action.type) {
@@ -10,6 +11,16 @@ export default function expensesReducer(state = initialState, action) {
         ...state,
         expenses: state.expenses.slice().push(action.payload)
       };
+    case types.SHOW_MODAL:
+      return {
+        ...state,
+        showingModal: true,
+      };
+    case types.HIDE_MODAL:
+      return {
+        ...state,
+        showingModal: false,
+      }
     default:
       return state;
   }

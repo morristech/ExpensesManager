@@ -1,55 +1,118 @@
-import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Table } from 'react-bootstrap';
+import React from 'react';
+import { Table, Button, Modal } from 'react-bootstrap';
+import { Field } from 'redux-form';
+import DateTime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
 
-import { expensesActions } from '../../ducks/expenses';
-
-const ExpensesPage = (props) => {
+const ExpensesPage = ({ expenses, showingModal, actions, invalid, submitting, handleSubmit }) => {
   return (
-    <Table striped bordered condensed hover>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Description</th>
-          <th>Comment</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        {props.expenses.map(item =>
-          <tr key={item.id}>
-            <td>{item.datetime}</td>
-            <td>{item.description}</td>
-            <td>{item.comment}</td>
-            <td>{item.amount}</td>
+    <div>
+      <Table striped bordered condensed hover>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Comment</th>
+            <th>Amount</th>
           </tr>
-        )}
-        <tr>
-          <td>something</td>
-          <td>something</td>
-          <td>something</td>
-          <td>something</td>
-        </tr>
-      </tbody>
-    </Table>
+        </thead>
+        <tbody>
+          {expenses.map(item =>
+            <tr key={item.id}>
+              <td>{item.datetime}</td>
+              <td>{item.description}</td>
+              <td>{item.comment}</td>
+              <td>{item.amount}</td>
+            </tr>
+          )}
+          <tr>
+            <td>something</td>
+            <td>something</td>
+            <td>something</td>
+            <td>something</td>
+          </tr>
+        </tbody>
+      </Table>
+
+      <Button
+        className="pull-right"
+        bsStyle="primary"
+        onClick={actions.showModal}
+      >
+        Add new expense
+      </Button>
+
+      <Modal show={showingModal} onHide={actions.hideModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Expense Information</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form
+            onSubmit={e => {e.preventDefault(); handleSubmit(e)}}
+          >
+            <label for="date">Date:</label>
+            <Field
+              name="date"
+              className="form-control"
+              component={props => <DateTime
+                inputProps={ {name: 'date'} }
+                value={props.input.value}
+                onChange={param => props.input.onChange(param)}
+              />}
+              placeholder="Date"
+              required
+            />
+            <br />
+
+            <label for="description">Description:</label>
+            <Field
+              name="description"
+              className="form-control"
+              component="input"
+              type="text"
+              placeholder="Description"
+              required
+            />
+            <br />
+
+            <label for="comment">Comment:</label>
+            <Field
+              name="comment"
+              className="form-control"
+              component="input"
+              type="text"
+              placeholder="Comment"
+              required
+            />
+            <br />
+
+            <label for="amount">Amount in dollars:</label>
+            <Field
+              name="amount"
+              className="form-control"
+              component="input"
+              type="number"
+              placeholder="Amount in dollars"
+              required
+            />
+            <br />
+
+            <div>
+              <Button
+                bsStyle="primary"
+                className="btn-lg"
+                disabled={invalid || submitting}
+                type="submit"
+              >
+                {submitting ? 'Updating...' : 'Add new expense'}
+              </Button>
+            </div>
+
+          </form>
+        </Modal.Body>
+      </Modal>
+    </div>
   );
 };
 
-ExpensesPage.propTypes = {
-  actions: PropTypes.object.isRequired,
-  expenses: PropTypes.array.isRequired,
-};
-
-const mapStateToProps = state => state.expenses;
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(expensesActions, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ExpensesPage);
+export default ExpensesPage;

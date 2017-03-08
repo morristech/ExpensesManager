@@ -33,6 +33,7 @@ class LoginPage extends React.Component {
             component="input"
             type="email"
             placeholder="Email"
+            required
           />
           <br />
 
@@ -42,6 +43,7 @@ class LoginPage extends React.Component {
             component="input"
             type="password"
             placeholder="Password"
+            required
           />
           <br />
 
