@@ -2,6 +2,7 @@ import {createStore, compose, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
+import persistState from 'redux-localstorage';
 import createLogger from 'redux-logger';
 
 import rootReducer from './reducer';
@@ -23,7 +24,9 @@ function configureStoreProd(initialState) {
   ];
 
   const store = createStore(rootReducer, initialState, compose(
-    applyMiddleware(...middlewares)
+    applyMiddleware(...middlewares),
+    // Save state to localStorage
+    persistState('auth'),
     )
   );
 
@@ -53,7 +56,10 @@ function configureStoreDev(initialState) {
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
   const store = createStore(rootReducer, initialState, composeEnhancers(
-    applyMiddleware(...middlewares)
+    applyMiddleware(...middlewares),
+
+    // Save state to localStorage
+    persistState('auth'),
     )
   );
 
