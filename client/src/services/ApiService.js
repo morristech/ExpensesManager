@@ -10,16 +10,15 @@ export default function request(endpoint, method = 'GET', body) {
     },
     body: JSON.stringify(body),
   })
-  .then(response => response.json())
   .then((response) => {
     if (response.status >= 200 && response.status < 300) {
       return response;
     } else {
-      console.log(response)
-      const error = new Error(`[${response.code}]${response.name}: ${response.message}.`)
+      const error = new Error('An error occured.')
       error.response = response;
       throw error;
     }
   })
+  .then(response => response.json())
   .catch((error) => { throw error; });
 }
