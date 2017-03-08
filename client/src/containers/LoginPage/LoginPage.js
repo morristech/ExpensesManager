@@ -1,6 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import { Field, reduxForm } from 'redux-form';
+import { Form, Field, reduxForm } from 'redux-form';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';

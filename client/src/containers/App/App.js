@@ -5,8 +5,10 @@ import { bindActionCreators } from 'redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { authActions } from '../../ducks/auth';
+import { errorsActions } from '../../ducks/errors';
 
-import Topbar from '../../components/Topbar/Topbar';
+import TopBar from '../../components/TopBar/TopBar';
+import AlertBar from '../../components/AlertBar/AlertBar';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -14,8 +16,9 @@ import Topbar from '../../components/Topbar/Topbar';
 const App = (props) => {
   return (
     <div>
-      <Topbar auth={props.auth} logout={props.actions.logout} />
+      <TopBar auth={props.auth} logout={props.authActions.logout} />
       <div className="container">
+        <AlertBar error={props.errors} onDismiss={props.errorsActions.resetError} />
         {props.children}
       </div>
     </div>
@@ -24,17 +27,19 @@ const App = (props) => {
 
 App.propTypes = {
   children: PropTypes.element,
-  // actions: PropTypes.object.isRequired,
+  // authActions: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  errors: PropTypes.string,
 };
 
 const mapStateToProps = state => {
-  return { auth: state.auth };
+  return { auth: state.auth, errors: state.errors };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators(authActions, dispatch)
+    authActions: bindActionCreators(authActions, dispatch),
+    errorsActions: bindActionCreators(errorsActions, dispatch)
   };
 };
 

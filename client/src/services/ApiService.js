@@ -2,7 +2,8 @@ const BASE_URL = 'http://localhost:8080';
 
 export default function request(endpoint, method = 'GET', body, token) {
   // console.log(`Fetching ${BASE_URL}?${endpoint}&utf8=1`);
-  //
+
+  // Set the headers, add token is necessary
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -12,20 +13,28 @@ export default function request(endpoint, method = 'GET', body, token) {
   }
 
   const options = { method, headers };
+
+  // Set the body is necessary
   if (body) {
     options.body = JSON.stringify(body);
   }
 
   return fetch(`${BASE_URL}/${endpoint}`, options)
+  // Try to parse the response
+  .then(response =>
+    response.json().then(json => ({
+      raw: response,
+      json
+    })
+  ))
   .then((response) => {
-    if (response.status >= 200 && response.status < 300) {
-      return response;
+    if (response.raw.ok) {
+      return response.json;
     } else {
-      const error = new Error('An error occured.')
-      error.response = response;
+      const error = new Error()
+      error.response = response.json;
       throw error;
     }
   })
-  .then(response => response.json())
   .catch((error) => { throw error; });
 }

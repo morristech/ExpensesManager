@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Nav, NavItem, Navbar } from 'react-bootstrap';
 
-const Topbar = ({ auth, logout }) => {
+const TopBar = ({ auth, logout }) => {
   return (
     <Navbar>
       <Navbar.Header>
@@ -29,4 +29,4 @@ const Topbar = ({ auth, logout }) => {
   );
 };
 
-export default Topbar;
+export default TopBar;
