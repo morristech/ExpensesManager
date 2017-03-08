@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Nav, NavItem, Navbar } from 'react-bootstrap';
 
-const Topbar = (auth, logout) => {
+const Topbar = ({ auth, logout }) => {
   return (
     <Navbar>
       <Navbar.Header>
@@ -10,7 +10,7 @@ const Topbar = (auth, logout) => {
           <Link to="/">Expenses Manager</Link>
         </Navbar.Brand>
       </Navbar.Header>
-      {auth.loggedIn ?
+      {auth.isLoggedIn ?
         <Nav pullRight>
           <NavItem onClick={logout}>Logout</NavItem>
         </Nav>
