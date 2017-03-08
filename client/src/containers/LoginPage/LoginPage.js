@@ -1,39 +1,31 @@
 import React from 'react';
-import { reduxForm, SubmissionError } from 'redux-form';
+import { bindActionCreators } from 'redux';
+import { Field, reduxForm } from 'redux-form';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
-import { Field } from 'redux-form';
 import { Button } from 'react-bootstrap';
-import { feathersAuthentication } from '../../feathers';
 
-// TODO Put into saga
-const handleSubmit = (values, dispatch) => new Promise((resolve, reject) => {
-  dispatch(feathersAuthentication.authenticate(
-    { type: 'local', email: values.email, password: values.password }
-  ))
-    .then(() => resolve())
-    .catch(err => console.err(err));
-});
+import { authActions } from '../../ducks/auth';
 
+function handleSubmit(values, dispatch) {
+  return dispatch(authActions.loginRequest(values.email, values.password));
+}
 
-class Form extends React.Component {
-  componentWillMount() {
-    this.props.handleLogout();
-  }
-
+class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
-    if (!this.props.isAuthenticated && nextProps.isAuthenticated) { // true after successful submit
+    if (!this.props.isLoggedIn && nextProps.isLoggedIn) { // true after successful submit
       this.props.handleRedirect();
     }
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, invalid } = this.props;
-
+    const { handleSubmit, submitting, invalid } = this.props;
     return (
       <div className="container">
-
-        <form onSubmit={handleSubmit} className="col-md-6 col-md-offset-3 text-center">
+        <form
+          className="col-md-6 col-md-offset-3 text-center"
+          onSubmit={e => {e.preventDefault(); handleSubmit(e)}}
+        >
           <h2>Sign In</h2>
           <Field
             name="email"
@@ -56,7 +48,7 @@ class Form extends React.Component {
           <div>
             <Button
               className="btn-lg"
-              disabled={invalid || submitting}
+              disabled={invalid || submitting}
               type="submit"
             >
               {submitting ? 'Signing In...' : 'Sign In'}
@@ -71,13 +63,11 @@ class Form extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isSignedIn,
+  auth: state.auth
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  handleLogout: () => {
-    dispatch(feathersAuthentication.logout());
-  },
+  actions: bindActionCreators(authActions, dispatch),
   handleRedirect: () => {
     dispatch(push(ownProps.redirectTo || '/'));
   },
@@ -90,11 +80,7 @@ export default connect(
 )(
   // decorate react component with redux-form
   reduxForm({
-    form: 'Login',
-    // initialValues: { email: 'a@a.com' }, // set initialValues in mapStateToProps for dynamic data
-    // validate: usersClientValidations.signin,
-    // asyncBlurFields: ['email', 'password'],
-    // asyncValidate: (values, dispatch, props) => new Promise(...),
-    onSubmit: handleSubmit,
-  })(Form)
+    form: 'LoginForm',
+    onSubmit: handleSubmit
+  })(LoginPage)
 );

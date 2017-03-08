@@ -2,12 +2,13 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { reducer as reduxFormReducer } from 'redux-form'
-import { feathersAuthentication } from '../feathers';
+
+import auth from '../ducks/auth';
 import expenses from '../ducks/expenses';
 
 
 const rootReducer = combineReducers({
-  auth: feathersAuthentication.reducer,
+  auth,
   expenses,
   routing: routerReducer,
   form: reduxFormReducer
