@@ -13,7 +13,7 @@ class ExpensesPage extends React.Component {
   }
 
   render() {
-    const { expenses, filter, showingModal, actions, submitting, handleSubmit } = this.props;
+    const { expenses, filter, showingModal, actions, isFetching, handleSubmit } = this.props;
 
     /**
      * Helper function to filter the expenses matching the string filter
@@ -178,10 +178,10 @@ class ExpensesPage extends React.Component {
                 <Button
                   bsStyle="primary"
                   className="btn-lg"
-                  disabled={submitting}
+                  disabled={isFetching}
                   type="submit"
                 >
-                  {submitting ? 'Updating...' : 'Submit'}
+                  {isFetching ? 'Updating...' : 'Submit'}
                 </Button>
               </div>
 
@@ -199,8 +199,8 @@ ExpensesPage.propTypes = {
   users: React.PropTypes.object.isRequired,
   auth: React.PropTypes.object.isRequired,
   filter: React.PropTypes.string.isRequired,
+  isFetching: React.PropTypes.bool.isRequired,
   showingModal: React.PropTypes.bool.isRequired,
-  submitting: React.PropTypes.bool.isRequired,
   expensesActions: React.PropTypes.object.isRequired,
   usersActions: React.PropTypes.object.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
