@@ -30,7 +30,7 @@ class AdminPage extends React.Component {
                 <td>{item.description}</td>
                 <td>{item.comment}</td>
                 <td>{item.amount}</td>
-                <th>{item.UserId}</th>
+                <td>{item.userId}</td>
               </tr>
             )}
           </tbody>

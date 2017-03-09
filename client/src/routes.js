@@ -11,7 +11,7 @@ import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 const requireAuth = store => (nextState, replace) => {
   if (!store.getState().auth.isLoggedIn) {
-    replace({
+    return replace({
       pathname: '/login',
     });
   }
@@ -19,9 +19,16 @@ const requireAuth = store => (nextState, replace) => {
 
 const requireAdmin = store => (nextState, replace) => {
   const auth = store.getState().auth;
-  if (!auth.isLoggedIn || (auth.user.data.roles.indexOf('manager') === -1 && auth.user.data.roles.indexOf('admin') === -1)) {
-    replace({
-      pathname: '/login',
+  // Redirect to login page if not logged in
+  if (!auth.isLoggedIn) {
+    return replace({
+      pathname: '/login'
+    })
+  }
+  // Redirect to homepage if not admin/manager
+  if (auth.user.data.roles.indexOf('manager') === -1 && auth.user.data.roles.indexOf('admin') === -1) {
+    return replace({
+      pathname: '/',
     });
   }
 };
