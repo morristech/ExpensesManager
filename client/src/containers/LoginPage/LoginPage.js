@@ -33,7 +33,7 @@ class LoginPage extends React.Component {
       <div className="container">
         <form
           className="col-md-6 col-md-offset-3 text-center"
-          onSubmit={e => {e.preventDefault(); handleSubmit(e)}}
+          onSubmit={e => {e.preventDefault(); handleSubmit(e);}}
         >
           <h2>Sign In</h2>
           <Field

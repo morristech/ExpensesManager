@@ -31,7 +31,7 @@ export default function request(endpoint, method = 'GET', body, token) {
     if (response.raw.ok) {
       return response.json;
     } else {
-      const error = new Error()
+      const error = new Error();
       error.response = response.json;
       throw error;
     }

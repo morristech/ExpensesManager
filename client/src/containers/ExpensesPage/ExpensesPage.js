@@ -6,7 +6,7 @@ import 'react-datetime/css/react-datetime.css';
 
 class ExpensesPage extends React.Component {
   componentDidMount() {
-    console.log(this.props)
+    console.log(this.props);
     this.props.actions.fetchExpenses();
   }
 
@@ -21,7 +21,7 @@ class ExpensesPage extends React.Component {
               <th>Description</th>
               <th>Comment</th>
               <th>Amount</th>
-              <th></th>
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -32,7 +32,7 @@ class ExpensesPage extends React.Component {
                 <td>{item.comment}</td>
                 <td>{item.amount}</td>
                 <th>
-                  <Button className="btn-xs" onClick={() => { this.props.dispatch(initialize('ExpensesForm', item)); actions.showModal();} }>Edit</Button>
+                  <Button className="btn-xs" onClick={() => { this.props.dispatch(initialize('ExpensesForm', item)); actions.showModal();}}>Edit</Button>
                   <Button className="btn-xs" onClick={() => actions.deleteExpense(item.id)}>Delete</Button>
                 </th>
               </tr>
@@ -54,7 +54,7 @@ class ExpensesPage extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <form
-              onSubmit={e => {e.preventDefault(); handleSubmit(e)}}
+              onSubmit={e => {e.preventDefault(); handleSubmit(e);}}
             >
               <Field
                 name="id"
@@ -68,7 +68,7 @@ class ExpensesPage extends React.Component {
                 name="datetime"
                 className="form-control"
                 component={props => <DateTime
-                  inputProps={ {name: 'datetime'} }
+                  inputProps={{name: 'datetime'}}
                   value={props.input.value}
                   onChange={param => props.input.onChange(param)}
                 />}

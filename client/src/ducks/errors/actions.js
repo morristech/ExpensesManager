@@ -4,8 +4,8 @@ const resetError = () => {
   return {
     type: types.RESET_ERROR,
   };
-}
+};
 
 export default {
   resetError,
-}
+};

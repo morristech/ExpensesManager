@@ -24,7 +24,7 @@ const logout = () => {
   return {
     type: types.LOGOUT
   };
-}
+};
 
 export default {
   loginRequest,

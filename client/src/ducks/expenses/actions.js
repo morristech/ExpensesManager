@@ -44,13 +44,13 @@ const showModal = () => {
   return {
     type: types.SHOW_MODAL
   };
-}
+};
 
 const hideModal = () => {
   return {
     type: types.HIDE_MODAL
   };
-}
+};
 
 export default {
   createExpense,

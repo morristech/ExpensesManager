@@ -17,7 +17,7 @@ const handleSubmit = (values, dispatch) => {
   } else {
     dispatch(expensesActions.createExpense(values.datetime, values.description, values.comment, values.amount));
   }
-}
+};
 
 const mapStateToProps = state => state.expenses;
 

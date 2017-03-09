@@ -1,7 +1,7 @@
 import {createStore, compose, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { browserHistory } from 'react-router';
-import { routerMiddleware } from 'react-router-redux'
+import { routerMiddleware } from 'react-router-redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import persistState from 'redux-localstorage';

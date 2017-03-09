@@ -26,7 +26,7 @@ export default function expensesReducer(state = initialState, action) {
       return {
         ...state,
         showingModal: false,
-      }
+      };
     default:
       return state;
   }
