@@ -42,7 +42,7 @@ module.exports = function(sequelize) {
     // https://github.com/feathersjs/feathers-sequelize/issues/20
     classMethods: {
       associate(models) {
-        user.hasMany(models.expenses);
+        user.hasMany(models.expenses, { onDelete: 'cascade' });
       }
     }
   });

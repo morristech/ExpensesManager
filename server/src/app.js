@@ -20,7 +20,7 @@ const app = feathers();
 
 app.configure(configuration(path.join(__dirname, '..')));
 
-app.configure(seeder(seedConfig));
+// app.configure(seeder(seedConfig));
 
 app.use(compress())
   .options('*', cors())

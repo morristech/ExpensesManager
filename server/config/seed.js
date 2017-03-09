@@ -2,6 +2,7 @@ module.exports = {
   services: [
     {
       path: 'users',
+      delete: false,
       randomize: false, // don't pick a random template
       templates: [
         {
