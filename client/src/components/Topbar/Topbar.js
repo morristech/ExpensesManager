@@ -12,7 +12,7 @@ const TopBar = ({ auth, logout }) => {
       </Navbar.Header>
       {auth.isLoggedIn &&
         <ul className="nav navbar-nav">
-          <li><Link to="/expenses">Dashboard</Link></li>
+          <li><Link to="/dashboard">Dashboard</Link></li>
         </ul>
       }
       {auth.isLoggedIn ?
