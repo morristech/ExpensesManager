@@ -23,7 +23,7 @@ const requireAdmin = store => (nextState, replace) => {
   if (!auth.isLoggedIn) {
     return replace({
       pathname: '/login'
-    })
+    });
   }
   // Redirect to homepage if not admin/manager
   if (auth.user.data.roles.indexOf('manager') === -1 && auth.user.data.roles.indexOf('admin') === -1) {
@@ -33,7 +33,7 @@ const requireAdmin = store => (nextState, replace) => {
   }
 };
 
-export default store => (
+const getRoutes = store => (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
     <Route path="login" component={LoginPage} />
@@ -43,3 +43,5 @@ export default store => (
     <Route path="*" component={NotFoundPage} />
   </Route>
 );
+
+export default getRoutes;

@@ -1,15 +1,9 @@
-import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import { expensesActions } from '../../ducks/expenses';
 import ExpensesPage from './ExpensesPage';
-
-ExpensesPage.propTypes = {
-  actions: PropTypes.object.isRequired,
-  expenses: PropTypes.array.isRequired,
-};
 
 const handleSubmit = (values, dispatch) => {
   if (values.id) {

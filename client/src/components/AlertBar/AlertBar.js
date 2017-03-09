@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert } from 'react-bootstrap';
 
-const TopBar = ({ error, onDismiss }) => {
+const AlertBar = ({ error, onDismiss }) => {
   return (
     <div>
       {error && <Alert bsStyle="danger" onDismiss={onDismiss}>
@@ -11,4 +11,9 @@ const TopBar = ({ error, onDismiss }) => {
   );
 };
 
-export default TopBar;
+AlertBar.propTypes = {
+  onDismiss: React.PropTypes.func.isRequired,
+  error: React.PropTypes.string.isRequired,
+};
+
+export default AlertBar;

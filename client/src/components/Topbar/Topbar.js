@@ -33,4 +33,9 @@ const TopBar = ({ auth, logout }) => {
   );
 };
 
+TopBar.propTypes = {
+  auth: React.PropTypes.object.isRequired,
+  logout: React.PropTypes.func.isRequired,
+};
+
 export default TopBar;

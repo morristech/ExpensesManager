@@ -27,9 +27,10 @@ const App = (props) => {
 
 App.propTypes = {
   children: PropTypes.element,
-  // authActions: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.string,
+  authActions: PropTypes.object.isRequired,
+  errorsActions: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => {

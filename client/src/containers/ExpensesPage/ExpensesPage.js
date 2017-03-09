@@ -1,18 +1,33 @@
 import React from 'react';
 import { Table, Button, Modal, Tabs, Tab } from 'react-bootstrap';
-import { Form, Field, initialize } from 'redux-form';
+import { Field, initialize } from 'redux-form';
 import DateTime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import moment from 'moment';
 import _ from 'lodash';
 
 class ExpensesPage extends React.Component {
+
+  static propTypes = {
+    actions: React.PropTypes.object.isRequired,
+    expenses: React.PropTypes.object.isRequired,
+    users: React.PropTypes.object.isRequired,
+    auth: React.PropTypes.object.isRequired,
+    filter: React.PropTypes.string.isRequired,
+    showingModal: React.PropTypes.bool.isRequired,
+    submitting: React.PropTypes.bool.isRequired,
+    expensesActions: React.PropTypes.object.isRequired,
+    usersActions: React.PropTypes.object.isRequired,
+    handleSubmit: React.PropTypes.func.isRequired,
+    dispatch: React.PropTypes.func.isRequired,
+  }
+
   componentDidMount() {
     this.props.actions.fetchExpenses();
   }
 
   render() {
-    const { expenses, filter, showingModal, actions, invalid, submitting, handleSubmit } = this.props;
+    const { expenses, filter, showingModal, actions, submitting, handleSubmit } = this.props;
 
     /**
      * Helper function to filter the expenses matching the string filter
@@ -29,7 +44,7 @@ class ExpensesPage extends React.Component {
         item.comment.indexOf(filter) >= 0 ||
         item.amount.indexOf(filter) >= 0
       );
-    }
+    };
 
     // The next few lines generate a derived expenses array with expenses grouped by week with their week sum
     // First, all expenses grouped by week
@@ -37,7 +52,7 @@ class ExpensesPage extends React.Component {
     // Next we calculate sum and average of each week and return a nice array
     const expensesDerived = Object.keys(expensesByWeek).map(week => {
       let sum = 0;
-      for (var i = 0; i < expensesByWeek[week].length; i++) {
+      for (let i = 0; i < expensesByWeek[week].length; i++) {
         sum += Number.parseFloat(expensesByWeek[week][i].amount);
       }
       return {
@@ -176,7 +191,7 @@ class ExpensesPage extends React.Component {
                 <Button
                   bsStyle="primary"
                   className="btn-lg"
-                  disabled={invalid || submitting}
+                  disabled={submitting}
                   type="submit"
                 >
                   {submitting ? 'Updating...' : 'Submit'}

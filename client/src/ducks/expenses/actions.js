@@ -63,7 +63,7 @@ const setFilter = filter => {
     type: types.SET_FILTER,
     payload: filter,
   };
-}
+};
 
 export default {
   createExpense,

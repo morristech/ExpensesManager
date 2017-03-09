@@ -1,5 +1,4 @@
 import { select, call, put, takeLatest } from 'redux-saga/effects';
-import { push } from 'react-router-redux';
 
 import types from './types';
 import ApiService from '../../services/ApiService';
@@ -55,7 +54,7 @@ function* fetchAllExpensesSaga() {
 function* updateExpenseSaga(action) {
   try {
     const token = yield select(state => state.auth.user.token);
-    const response = yield call(ApiService, `expenses/${action.payload.id}`, 'PATCH', action.payload.body, token);
+    yield call(ApiService, `expenses/${action.payload.id}`, 'PATCH', action.payload.body, token);
     // Fetch all expenses to update table of expenses
     yield put({ type: types.FETCH_EXPENSES_REQUEST });
     yield put({ type: types.UPDATE_EXPENSE_SUCCESS });
@@ -71,7 +70,7 @@ function* updateExpenseSaga(action) {
 function* deleteExpenseSaga(action) {
   try {
     const token = yield select(state => state.auth.user.token);
-    const response = yield call(ApiService, `expenses/${action.payload}`, 'DELETE', null, token);
+    yield call(ApiService, `expenses/${action.payload}`, 'DELETE', null, token);
     // Fetch all expenses to update table of expenses
     yield put({ type: types.FETCH_EXPENSES_REQUEST });
     yield put({ type: types.DELETE_EXPENSE_SUCCESS });

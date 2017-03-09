@@ -13,11 +13,13 @@ function handleSubmit(values, dispatch) {
 
 class LoginPage extends React.Component {
 
-  componentWillReceiveProps(nextProps) {
-    // Redirect if already logged in
-    if (nextProps.auth.isLoggedIn) {
-      this.props.handleRedirect();
-    }
+  static propTypes = {
+    actions: React.PropTypes.object.isRequired,
+    auth: React.PropTypes.object.isRequired,
+    showingModal: React.PropTypes.bool.isRequired,
+    submitting: React.PropTypes.bool.isRequired,
+    handleRedirect: React.PropTypes.func.isRequired,
+    handleSubmit: React.PropTypes.func.isRequired,
   }
 
   componentWillMount() {
@@ -27,8 +29,15 @@ class LoginPage extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    // Redirect if already logged in
+    if (nextProps.auth.isLoggedIn) {
+      this.props.handleRedirect();
+    }
+  }
+
   render() {
-    const { handleSubmit, submitting, invalid } = this.props;
+    const { handleSubmit, submitting } = this.props;
     return (
       <div className="container">
         <form
@@ -59,7 +68,7 @@ class LoginPage extends React.Component {
           <div>
             <Button
               className="btn-lg"
-              disabled={invalid || submitting}
+              disabled={submitting}
               type="submit"
             >
               {submitting ? 'Signing In...' : 'Sign In'}

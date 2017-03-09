@@ -1,8 +1,17 @@
 import React from 'react';
-import { Table, Button, Tabs, Tab } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import moment from 'moment';
 
 class AdminPage extends React.Component {
+
+  static propTypes = {
+    expenses: React.PropTypes.object.isRequired,
+    users: React.PropTypes.object.isRequired,
+    auth: React.PropTypes.object.isRequired,
+    expensesActions: React.PropTypes.object.isRequired,
+    usersActions: React.PropTypes.object.isRequired,
+  }
+
   componentDidMount() {
     // Fetch expenses of everyone only if the user is an admin
     if (this.props.auth.user.data.roles.indexOf('admin') >= 0) {

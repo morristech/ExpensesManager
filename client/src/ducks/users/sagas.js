@@ -1,5 +1,4 @@
 import { select, call, put, takeLatest } from 'redux-saga/effects';
-import { push } from 'react-router-redux';
 
 import types from './types';
 import ApiService from '../../services/ApiService';
