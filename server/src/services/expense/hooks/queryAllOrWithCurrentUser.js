@@ -13,7 +13,6 @@ const queryAllOrWithCurrentUser = (options = {}) => {
   return function(hook) {
     // We can assume hook.params.user exists because the auth.restrictToAuthenticated()
     // hook is called before this and will throw an error if it doesn't
-    // console.log(hook);
     if (hook.params.user.roles.indexOf('admin') >= 0) {
       if (hook.params.query.all === 'true') {
         // Remove the all query param because it interferes with the SQL request

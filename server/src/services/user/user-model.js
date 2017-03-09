@@ -42,7 +42,6 @@ module.exports = function(sequelize) {
     // https://github.com/feathersjs/feathers-sequelize/issues/20
     classMethods: {
       associate(models) {
-        console.log(models)
         user.hasMany(models.expenses);
       }
     }
