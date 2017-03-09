@@ -11,16 +11,7 @@ function handleSubmit(values, dispatch) {
   return dispatch(authActions.registerRequest(values.email, values.password));
 }
 
-class LoginPage extends React.Component {
-
-  static propTypes = {
-    actions: React.PropTypes.object.isRequired,
-    auth: React.PropTypes.object.isRequired,
-    showingModal: React.PropTypes.bool.isRequired,
-    submitting: React.PropTypes.bool.isRequired,
-    handleRedirect: React.PropTypes.func.isRequired,
-    handleSubmit: React.PropTypes.func.isRequired,
-  }
+class RegisterPage extends React.Component {
 
   componentWillMount() {
     // Redirect if already logged in
@@ -81,6 +72,15 @@ class LoginPage extends React.Component {
   }
 }
 
+RegisterPage.propTypes = {
+  actions: React.PropTypes.object.isRequired,
+  auth: React.PropTypes.object.isRequired,
+  showingModal: React.PropTypes.bool.isRequired,
+  submitting: React.PropTypes.bool.isRequired,
+  handleRedirect: React.PropTypes.func.isRequired,
+  handleSubmit: React.PropTypes.func.isRequired,
+};
+
 
 const mapStateToProps = (state) => ({
   auth: state.auth
@@ -102,5 +102,5 @@ export default connect(
   reduxForm({
     form: 'RegisterForm',
     onSubmit: handleSubmit
-  })(LoginPage)
+  })(RegisterPage)
 );

@@ -8,20 +8,6 @@ import _ from 'lodash';
 
 class ExpensesPage extends React.Component {
 
-  static propTypes = {
-    actions: React.PropTypes.object.isRequired,
-    expenses: React.PropTypes.object.isRequired,
-    users: React.PropTypes.object.isRequired,
-    auth: React.PropTypes.object.isRequired,
-    filter: React.PropTypes.string.isRequired,
-    showingModal: React.PropTypes.bool.isRequired,
-    submitting: React.PropTypes.bool.isRequired,
-    expensesActions: React.PropTypes.object.isRequired,
-    usersActions: React.PropTypes.object.isRequired,
-    handleSubmit: React.PropTypes.func.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
-  }
-
   componentDidMount() {
     this.props.actions.fetchExpenses();
   }
@@ -205,5 +191,19 @@ class ExpensesPage extends React.Component {
     );
   }
 }
+
+ExpensesPage.propTypes = {
+  actions: React.PropTypes.object.isRequired,
+  expenses: React.PropTypes.object.isRequired,
+  users: React.PropTypes.object.isRequired,
+  auth: React.PropTypes.object.isRequired,
+  filter: React.PropTypes.string.isRequired,
+  showingModal: React.PropTypes.bool.isRequired,
+  submitting: React.PropTypes.bool.isRequired,
+  expensesActions: React.PropTypes.object.isRequired,
+  usersActions: React.PropTypes.object.isRequired,
+  handleSubmit: React.PropTypes.func.isRequired,
+  dispatch: React.PropTypes.func.isRequired,
+};
 
 export default ExpensesPage;

@@ -13,15 +13,6 @@ function handleSubmit(values, dispatch) {
 
 class LoginPage extends React.Component {
 
-  static propTypes = {
-    actions: React.PropTypes.object.isRequired,
-    auth: React.PropTypes.object.isRequired,
-    showingModal: React.PropTypes.bool.isRequired,
-    submitting: React.PropTypes.bool.isRequired,
-    handleRedirect: React.PropTypes.func.isRequired,
-    handleSubmit: React.PropTypes.func.isRequired,
-  }
-
   componentWillMount() {
     // Redirect if already logged in
     if (this.props.auth.isLoggedIn) {
@@ -80,6 +71,15 @@ class LoginPage extends React.Component {
     );
   }
 }
+
+LoginPage.propTypes = {
+  actions: React.PropTypes.object.isRequired,
+  auth: React.PropTypes.object.isRequired,
+  showingModal: React.PropTypes.bool.isRequired,
+  submitting: React.PropTypes.bool.isRequired,
+  handleRedirect: React.PropTypes.func.isRequired,
+  handleSubmit: React.PropTypes.func.isRequired,
+};
 
 
 const mapStateToProps = (state) => ({

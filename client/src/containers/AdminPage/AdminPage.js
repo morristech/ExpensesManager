@@ -4,14 +4,6 @@ import moment from 'moment';
 
 class AdminPage extends React.Component {
 
-  static propTypes = {
-    expenses: React.PropTypes.object.isRequired,
-    users: React.PropTypes.object.isRequired,
-    auth: React.PropTypes.object.isRequired,
-    expensesActions: React.PropTypes.object.isRequired,
-    usersActions: React.PropTypes.object.isRequired,
-  }
-
   componentDidMount() {
     // Fetch expenses of everyone only if the user is an admin
     if (this.props.auth.user.data.roles.indexOf('admin') >= 0) {
@@ -76,5 +68,13 @@ class AdminPage extends React.Component {
     );
   }
 }
+
+AdminPage.propTypes = {
+  expenses: React.PropTypes.object.isRequired,
+  users: React.PropTypes.object.isRequired,
+  auth: React.PropTypes.object.isRequired,
+  expensesActions: React.PropTypes.object.isRequired,
+  usersActions: React.PropTypes.object.isRequired,
+};
 
 export default AdminPage;
