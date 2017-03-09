@@ -26,7 +26,7 @@ class ExpensesPage extends React.Component {
       }
       const lowercaseFilter = filter.toLowerCase();
       return (
-        item.datetime.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
+        moment(item.datetime).format('MMMM Do YYYY, h:mm a').toLowerCase().indexOf(lowercaseFilter) >= 0 ||
         item.description.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
         item.comment.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
         item.amount.toLowerCase().indexOf(lowercaseFilter) >= 0
