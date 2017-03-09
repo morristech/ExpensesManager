@@ -3,12 +3,11 @@ import { Table, Button, Modal, Tabs, Tab } from 'react-bootstrap';
 import { Form, Field, initialize } from 'redux-form';
 import DateTime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
-import Moment from 'moment';
+import moment from 'moment';
 import _ from 'lodash';
 
 class ExpensesPage extends React.Component {
   componentDidMount() {
-    console.log(this.props);
     this.props.actions.fetchExpenses();
   }
 
@@ -34,7 +33,7 @@ class ExpensesPage extends React.Component {
 
     // The next few lines generate a derived expenses array with expenses grouped by week with their week sum
     // First, all expenses grouped by week
-    const expensesByWeek = _.groupBy(expenses, item => Moment(item.datetime).startOf('isoWeek'));
+    const expensesByWeek = _.groupBy(expenses, item => moment(item.datetime).startOf('isoWeek'));
     // Next we calculate sum and average of each week and return a nice array
     const expensesDerived = Object.keys(expensesByWeek).map(week => {
       let sum = 0;
@@ -64,7 +63,7 @@ class ExpensesPage extends React.Component {
               <tbody>
                 {expenses.filter(filterItems).map(item =>
                   <tr key={item.id}>
-                    <td>{item.datetime}</td>
+                    <td>{moment(item.datetime).format('MMMM Do YYYY, h:mm a')}</td>
                     <td>{item.description}</td>
                     <td>{item.comment}</td>
                     <td>{item.amount}</td>
@@ -101,7 +100,7 @@ class ExpensesPage extends React.Component {
               <tbody>
                 {expensesDerived.map(item =>
                   <tr key={item.week}>
-                    <td>Week of {item.week}</td>
+                    <td>Week of {moment(item.week).format('MMMM Do YYYY')}</td>
                     <td>{item.sum}</td>
                     <td>{(item.sum / 7).toFixed(2)}</td>
                   </tr>
