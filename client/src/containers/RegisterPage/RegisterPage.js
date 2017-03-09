@@ -13,6 +13,13 @@ function handleSubmit(values, dispatch) {
 
 class LoginPage extends React.Component {
 
+  componentWillReceiveProps(nextProps) {
+    // Redirect if already logged in
+    if (nextProps.auth.isLoggedIn) {
+      this.props.handleRedirect();
+    }
+  }
+
   componentWillMount() {
     // Redirect if already logged in
     if (this.props.auth.isLoggedIn) {
@@ -73,7 +80,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   actions: bindActionCreators(authActions, dispatch),
   handleRedirect: () => {
-    dispatch(push(ownProps.redirectTo || '/'));
+    dispatch(push(ownProps.redirectTo || '/expenses'));
   }
 });
 

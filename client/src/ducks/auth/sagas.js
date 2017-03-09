@@ -22,10 +22,15 @@ function* registerRequestSaga(action) {
   }
 }
 
+function* logoutSaga(action) {
+  yield put(push('/login'));
+}
+
 
 export default function* SpotDetailsSaga() {
   yield [
     takeLatest(types.LOGIN_REQUEST, loginRequestSaga),
     takeLatest(types.REGISTER_REQUEST, registerRequestSaga),
+    takeLatest(types.LOGOUT, logoutSaga),
   ];
 }
