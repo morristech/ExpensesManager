@@ -25,7 +25,7 @@ module.exports = function(sequelize) {
     roles: {
       type:   Sequelize.ARRAY(Sequelize.STRING),
       validate: {
-        correct: function(value) {
+        correctRole: function(value) {
           const Enum = ['user', 'manager', 'admin'];
           for (var i = value.length - 1; i >= 0; i--) {
             if (Enum.indexOf(value[i]) === -1) {

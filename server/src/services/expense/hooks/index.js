@@ -9,23 +9,36 @@ exports.before = {
     auth.verifyToken(),
     auth.populateUser(),
     auth.restrictToAuthenticated(),
+  ],
+  find: [
     auth.queryWithCurrentUser(),
   ],
-  find: [],
   get: [
-    auth.restrictToOwner(),
+    auth.restrictToRoles({
+      roles: ['admin'], // admins are allowed to access this resource
+      owner: true, // it should also allow owners regardless of their role
+    }),
   ],
   create: [
-    auth.associateCurrentUser(),
+    auth.associateCurrentUser(), // TODO allow admins to create expenses for everyone
   ],
   update: [
-    auth.restrictToOwner(),
+    auth.restrictToRoles({
+      roles: ['admin'], // admins are allowed to access this resource
+      owner: true, // it should also allow owners regardless of their role
+    }),
   ],
   patch: [
-    auth.restrictToOwner(),
+    auth.restrictToRoles({
+      roles: ['admin'], // admins are allowed to access this resource
+      owner: true, // it should also allow owners regardless of their role
+    }),
   ],
   remove: [
-    auth.restrictToOwner(),
+    auth.restrictToRoles({
+      roles: ['admin'], // admins are allowed to access this resource
+      owner: true, // it should also allow owners regardless of their role
+    }),
   ]
 };
 

@@ -9,13 +9,20 @@ exports.before = {
   find: [
     auth.verifyToken(),
     auth.populateUser(),
-    auth.restrictToAuthenticated()
+    auth.restrictToAuthenticated(),
+    auth.restrictToRoles({
+      roles: ['manager', 'admin'], // admins are allowed to access this resource
+    }),
   ],
   get: [
     auth.verifyToken(),
     auth.populateUser(),
     auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: 'id' })
+    auth.restrictToRoles({
+      roles: ['manager', 'admin'], // admins are allowed to access this resource
+      owner: true, // it should also allow owners regardless of their role
+      ownerField: 'id'
+    }),
   ],
   create: [
     auth.hashPassword()
@@ -24,19 +31,31 @@ exports.before = {
     auth.verifyToken(),
     auth.populateUser(),
     auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: 'id' })
+    auth.restrictToRoles({
+      roles: ['manager', 'admin'], // admins are allowed to access this resource
+      owner: true, // it should also allow owners regardless of their role
+      ownerField: 'id'
+    }),
   ],
   patch: [
     auth.verifyToken(),
     auth.populateUser(),
     auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: 'id' })
+    auth.restrictToRoles({
+      roles: ['manager', 'admin'], // admins are allowed to access this resource
+      owner: true, // it should also allow owners regardless of their role
+      ownerField: 'id'
+    }),
   ],
   remove: [
     auth.verifyToken(),
     auth.populateUser(),
     auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: 'id' })
+    auth.restrictToRoles({
+      roles: ['manager', 'admin'], // admins are allowed to access this resource
+      owner: true, // it should also allow owners regardless of their role
+      ownerField: 'id'
+    }),
   ]
 };
 
