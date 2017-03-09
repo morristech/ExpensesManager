@@ -13,7 +13,7 @@ const AlertBar = ({ error, onDismiss }) => {
 
 AlertBar.propTypes = {
   onDismiss: React.PropTypes.func.isRequired,
-  error: React.PropTypes.string.isRequired,
+  error: React.PropTypes.string,
 };
 
 export default AlertBar;
