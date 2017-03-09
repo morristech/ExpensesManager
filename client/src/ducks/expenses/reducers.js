@@ -2,6 +2,7 @@ import types from './types';
 
 const initialState = {
   expenses: [],
+  filter: '',
   showingModal: false,
 };
 export default function expensesReducer(state = initialState, action) {
@@ -26,6 +27,11 @@ export default function expensesReducer(state = initialState, action) {
       return {
         ...state,
         showingModal: false,
+      };
+    case types.SET_FILTER:
+      return {
+        ...state,
+        filter: action.payload,
       };
     default:
       return state;

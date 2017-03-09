@@ -52,6 +52,13 @@ const hideModal = () => {
   };
 };
 
+const setFilter = filter => {
+  return {
+    type: types.SET_FILTER,
+    payload: filter,
+  };
+}
+
 export default {
   createExpense,
   fetchExpenses,
@@ -59,4 +66,5 @@ export default {
   deleteExpense,
   showModal,
   hideModal,
+  setFilter,
 };

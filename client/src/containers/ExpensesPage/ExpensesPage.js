@@ -11,7 +11,26 @@ class ExpensesPage extends React.Component {
   }
 
   render() {
-    const { expenses, showingModal, actions, invalid, submitting, handleSubmit } = this.props;
+    const { expenses, filter, showingModal, actions, invalid, submitting, handleSubmit } = this.props;
+
+    /**
+     * Helper function to filter the expenses matching the string filter
+     * @param  {Object} item Each item of the expenses array to be filtered
+     * @return {array}       The resulting filtered array
+     */
+    const filterItems = item => {
+      if (!filter) {
+        return true;
+      }
+      // console.log('Desctiption', item.description);
+      // console.log(item.description.indexOf(filter) );
+      return (
+        item.datetime.indexOf(filter) >= 0 ||
+        item.description.indexOf(filter) >= 0 ||
+        item.comment.indexOf(filter) >= 0 ||
+        item.amount.indexOf(filter) >= 0
+      );
+    }
     return (
       <div>
         <Table striped bordered condensed hover>
@@ -25,7 +44,7 @@ class ExpensesPage extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {expenses.map(item =>
+            {expenses.filter(filterItems).map(item =>
               <tr key={item.id}>
                 <td>{item.datetime}</td>
                 <td>{item.description}</td>
@@ -39,6 +58,9 @@ class ExpensesPage extends React.Component {
             )}
           </tbody>
         </Table>
+
+        <label>Filter expenses: </label>
+        <input value={filter} onChange={e => actions.setFilter(e.target.value)} />
 
         <Button
           className="pull-right"
