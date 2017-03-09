@@ -195,14 +195,10 @@ class ExpensesPage extends React.Component {
 
 ExpensesPage.propTypes = {
   actions: React.PropTypes.object.isRequired,
-  expenses: React.PropTypes.object.isRequired,
-  users: React.PropTypes.object.isRequired,
-  auth: React.PropTypes.object.isRequired,
+  expenses: React.PropTypes.array.isRequired,
   filter: React.PropTypes.string.isRequired,
   isFetching: React.PropTypes.bool.isRequired,
   showingModal: React.PropTypes.bool.isRequired,
-  expensesActions: React.PropTypes.object.isRequired,
-  usersActions: React.PropTypes.object.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
   dispatch: React.PropTypes.func.isRequired,
 };

@@ -75,7 +75,6 @@ class LoginPage extends React.Component {
 LoginPage.propTypes = {
   actions: React.PropTypes.object.isRequired,
   auth: React.PropTypes.object.isRequired,
-  showingModal: React.PropTypes.bool.isRequired,
   handleRedirect: React.PropTypes.func.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
 };
