@@ -22,10 +22,19 @@ module.exports = function(sequelize) {
       type: Sequelize.STRING,
       allowNull: false
     },
-    role: {
-      type:   Sequelize.ENUM,
-      values: ['user', 'manager', 'admin'],
-      defaultValue: 'user'
+    roles: {
+      type:   Sequelize.ARRAY(Sequelize.STRING),
+      validate: {
+        correct: function(value) {
+          const Enum = ['user', 'manager', 'admin'];
+          for (var i = value.length - 1; i >= 0; i--) {
+            if (Enum.indexOf(value[i]) === -1) {
+              throw new Error('Invalid role.');
+            }
+          }
+        },
+      },
+      defaultValue: ['user'],
     }
   }, {
     freezeTableName: true,
