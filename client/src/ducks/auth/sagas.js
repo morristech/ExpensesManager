@@ -4,6 +4,10 @@ import { push } from 'react-router-redux';
 import types from './types';
 import ApiService from '../../services/ApiService';
 
+/**
+ * Make an API call to /auth/local to request a token
+ * @param {Object} action        action.payload is a { email, password } Object
+ */
 function* loginRequestSaga(action) {
   try {
     const response = yield call(ApiService, `auth/local`, 'POST', action.payload);
@@ -13,6 +17,10 @@ function* loginRequestSaga(action) {
   }
 }
 
+/**
+ * Make an API call to /users to create a new user
+ * @param {Object} action        action.payload the body of the new user
+ */
 function* registerRequestSaga(action) {
   try {
     const response = yield call(ApiService, `users`, 'POST', action.payload);
@@ -22,7 +30,10 @@ function* registerRequestSaga(action) {
   }
 }
 
-function* logoutSaga(action) {
+/**
+ * Redirect to /login on logout
+ */
+function* logoutSaga() {
   yield put(push('/login'));
 }
 

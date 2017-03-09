@@ -4,6 +4,10 @@ import { push } from 'react-router-redux';
 import types from './types';
 import ApiService from '../../services/ApiService';
 
+/**
+ * Make an API call to Create an expense
+ * @param {Object} action        action.payload is the body of the new expense
+ */
 function* createExpenseSaga(action) {
   try {
     const token = yield select(state => state.auth.user.token);
@@ -16,7 +20,10 @@ function* createExpenseSaga(action) {
   }
 }
 
-function* fetchExpensesSaga(action) {
+/**
+ * Make an API call to List all user's expenses
+ */
+function* fetchExpensesSaga() {
   try {
     const token = yield select(state => state.auth.user.token);
     const response = yield call(ApiService, `expenses`, 'GET', null, token);
@@ -26,6 +33,11 @@ function* fetchExpensesSaga(action) {
   }
 }
 
+/**
+ * Make an API call to Update an expense
+ * @param {String} action.payload.id    The id of the expense to be updated
+ * @param {Object} action.payload.body  The body of the expense to be updated
+ */
 function* updateExpenseSaga(action) {
   try {
     const token = yield select(state => state.auth.user.token);
@@ -38,6 +50,10 @@ function* updateExpenseSaga(action) {
   }
 }
 
+/**
+ * Make an API call to Delete an expense
+ * @param {Object} action        action.payload is the id of the expense of be deleted
+ */
 function* deleteExpenseSaga(action) {
   try {
     const token = yield select(state => state.auth.user.token);
