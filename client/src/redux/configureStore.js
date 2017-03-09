@@ -31,7 +31,19 @@ function configureStoreProd(initialState) {
   const store = createStore(rootReducer, initialState, compose(
     applyMiddleware(...middlewares),
     // Save state to localStorage
-    persistState('auth'),
+    persistState('auth', {
+      slicer: paths => {
+        return (state) => {
+          const subset = {
+            auth: {
+              isLoggedIn: state.auth.isLoggedIn,
+              user: state.auth.user
+            }
+          };
+          return subset;
+        }
+      }
+    }),
     )
   );
 
@@ -67,7 +79,19 @@ function configureStoreDev(initialState) {
     applyMiddleware(...middlewares),
 
     // Save state to localStorage
-    persistState('auth'),
+    persistState('auth', {
+      slicer: paths => {
+        return (state) => {
+          const subset = {
+            auth: {
+              isLoggedIn: state.auth.isLoggedIn,
+              user: state.auth.user
+            }
+          };
+          return subset;
+        }
+      }
+    }),
     )
   );
 
