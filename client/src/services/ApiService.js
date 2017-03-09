@@ -1,5 +1,13 @@
 const BASE_URL = 'http://localhost:8080';
 
+/**
+ * Helper function to make an API call to the backend. Using fetch.
+ * @param  {String} endpoint The API endpoint to call.
+ * @param  {String} method   The HTTP method to use (defaults to GET).
+ * @param  {Object} body     Optional. The body of the request.
+ * @param  {String} token    Optional. A token to be added to the Authorization header.
+ * @return {Promise}         A promise with the response of the error of the request.
+ */
 export default function request(endpoint, method = 'GET', body, token) {
   // console.log(`Fetching ${BASE_URL}?${endpoint}&utf8=1`);
 
