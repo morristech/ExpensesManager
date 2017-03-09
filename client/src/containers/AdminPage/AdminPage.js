@@ -35,7 +35,7 @@ class AdminPage extends React.Component {
                   <td>{moment(item.datetime).format('MMMM Do YYYY, h:mm a')}</td>
                   <td>{item.description}</td>
                   <td>{item.comment}</td>
-                  <td>{item.amount}</td>
+                  <td>${item.amount}</td>
                   <td>{item.userId}</td>
                 </tr>
               )}
