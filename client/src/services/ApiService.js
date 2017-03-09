@@ -1,4 +1,5 @@
-const BASE_URL = 'http://localhost:8080';
+// TODO put this into env variables
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://expenses-server.herokuapp.com' : 'http://localhost:8080';
 
 /**
  * Helper function to make an API call to the backend. Using fetch.
