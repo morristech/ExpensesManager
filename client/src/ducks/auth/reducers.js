@@ -2,20 +2,23 @@ import types from './types';
 
 const initialState = {
   isLoggedIn: false,
+  isFetching: false,
   user: null
 };
 export default function expensesReducer(state = initialState, action) {
   switch (action.type) {
-    case types.LOGIN_SUCCESS:
+    case types.LOGIN_REQUEST:
+    case types.REGISTER_REQUEST:
       return {
         ...state,
-        isLoggedIn: true,
-        user: action.payload
+        isFetching: true,
       };
+    case types.LOGIN_SUCCESS:
     case types.REGISTER_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
+        isFetching: false,
         user: action.payload
       };
     case types.LOGOUT:

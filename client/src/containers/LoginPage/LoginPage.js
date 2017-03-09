@@ -28,7 +28,7 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, auth } = this.props;
     return (
       <div className="container">
         <form
@@ -59,10 +59,10 @@ class LoginPage extends React.Component {
           <div>
             <Button
               className="btn-lg"
-              disabled={submitting}
+              disabled={auth.isFetching}
               type="submit"
             >
-              {submitting ? 'Signing In...' : 'Sign In'}
+              {auth.isFetching ? 'Signing In...' : 'Sign In'}
             </Button>
           </div>
 
@@ -76,7 +76,6 @@ LoginPage.propTypes = {
   actions: React.PropTypes.object.isRequired,
   auth: React.PropTypes.object.isRequired,
   showingModal: React.PropTypes.bool.isRequired,
-  submitting: React.PropTypes.bool.isRequired,
   handleRedirect: React.PropTypes.func.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
 };
