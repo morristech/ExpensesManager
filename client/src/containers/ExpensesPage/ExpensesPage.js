@@ -96,7 +96,6 @@ class ExpensesPage extends React.Component {
                   <th>Week</th>
                   <th>Total spent</th>
                   <th>Average per day</th>
-                  <th />
                 </tr>
               </thead>
               <tbody>
