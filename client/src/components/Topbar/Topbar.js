@@ -17,6 +17,7 @@ const TopBar = ({ auth, logout }) => {
       }
       {auth.isLoggedIn ?
         <Nav pullRight>
+          <NavItem>Hello {auth.user.data.email}</NavItem>
           <NavItem onClick={logout}>Logout</NavItem>
         </Nav>
       :

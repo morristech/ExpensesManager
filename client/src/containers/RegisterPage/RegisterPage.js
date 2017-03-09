@@ -80,7 +80,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   actions: bindActionCreators(authActions, dispatch),
   handleRedirect: () => {
-    dispatch(push(ownProps.redirectTo || '/expenses'));
+    dispatch(push(ownProps.redirectTo || '/dashboard'));
   }
 });
 

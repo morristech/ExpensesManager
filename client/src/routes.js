@@ -21,7 +21,7 @@ export default store => (
     <IndexRoute component={HomePage} />
     <Route path="login" component={LoginPage} />
     <Route path="register" component={RegisterPage} />
-    <Route path="expenses" component={ExpensesPage} onEnter={requireAuth(store)}/>
+    <Route path="dashboard" component={ExpensesPage} onEnter={requireAuth(store)}/>
     <Route path="*" component={NotFoundPage} />
   </Route>
 );
