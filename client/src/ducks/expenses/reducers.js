@@ -13,6 +13,7 @@ export default function expensesReducer(state = initialState, action) {
         ...state,
         showingModal: false,
       };
+    case types.FETCH_ALL_EXPENSES_SUCCESS:
     case types.FETCH_EXPENSES_SUCCESS:
       return {
         ...state,

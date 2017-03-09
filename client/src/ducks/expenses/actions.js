@@ -40,6 +40,12 @@ const deleteExpense = expenseId => {
   };
 };
 
+const fetchAllExpenses = () => {
+  return {
+    type: types.FETCH_ALL_EXPENSES_REQUEST,
+  };
+};
+
 const showModal = () => {
   return {
     type: types.SHOW_MODAL
@@ -64,6 +70,7 @@ export default {
   fetchExpenses,
   updateExpense,
   deleteExpense,
+  fetchAllExpenses,
   showModal,
   hideModal,
   setFilter,

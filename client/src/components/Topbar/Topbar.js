@@ -13,6 +13,9 @@ const TopBar = ({ auth, logout }) => {
       {auth.isLoggedIn &&
         <ul className="nav navbar-nav">
           <li><Link to="/dashboard">Dashboard</Link></li>
+          {(auth.user.data.roles.indexOf('manager') >= 0 || auth.user.data.roles.indexOf('admin') >= 0) &&
+            <li><Link to="/admin">Admin</Link></li>
+          }
         </ul>
       }
       {auth.isLoggedIn ?

@@ -34,6 +34,20 @@ function* fetchExpensesSaga() {
 }
 
 /**
+ * Make an API call to List every expenses in the database
+ * Backend only allows Admin to do this
+ */
+function* fetchAllExpensesSaga() {
+  try {
+    const token = yield select(state => state.auth.user.token);
+    const response = yield call(ApiService, `expenses?all=true`, 'GET', null, token);
+    yield put({ type: types.FETCH_ALL_EXPENSES_SUCCESS, payload: response.data });
+  } catch (error) {
+    yield put({ type: types.FETCH_ALL_EXPENSES_FAILURE, error });
+  }
+}
+
+/**
  * Make an API call to Update an expense
  * @param {String} action.payload.id    The id of the expense to be updated
  * @param {Object} action.payload.body  The body of the expense to be updated
@@ -72,5 +86,6 @@ export default function* expensesSaga() {
     takeLatest(types.FETCH_EXPENSES_REQUEST, fetchExpensesSaga),
     takeLatest(types.UPDATE_EXPENSE_REQUEST, updateExpenseSaga),
     takeLatest(types.DELETE_EXPENSE_REQUEST, deleteExpenseSaga),
+    takeLatest(types.FETCH_ALL_EXPENSES_REQUEST, fetchAllExpensesSaga),
   ];
 }
