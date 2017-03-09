@@ -24,11 +24,12 @@ class ExpensesPage extends React.Component {
       if (!filter) {
         return true;
       }
+      const lowercaseFilter = filter.toLowerCase();
       return (
-        item.datetime.indexOf(filter) >= 0 ||
-        item.description.indexOf(filter) >= 0 ||
-        item.comment.indexOf(filter) >= 0 ||
-        item.amount.indexOf(filter) >= 0
+        item.datetime.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
+        item.description.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
+        item.comment.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
+        item.amount.toLowerCase().indexOf(lowercaseFilter) >= 0
       );
     };
 
