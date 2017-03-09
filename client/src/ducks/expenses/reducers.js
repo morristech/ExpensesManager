@@ -33,6 +33,14 @@ export default function expensesReducer(state = initialState, action) {
         ...state,
         filter: action.payload,
       };
+    case types.CREATE_EXPENSE_FAILURE:
+    case types.FETCH_EXPENSES_FAILURE:
+    case types.UPDATE_EXPENSE_FAILURE:
+    case types.DELETE_EXPENSE_FAILURE:
+      return {
+        ...state,
+        expenses: []
+      };
     default:
       return state;
   }
