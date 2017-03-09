@@ -22,8 +22,6 @@ class ExpensesPage extends React.Component {
       if (!filter) {
         return true;
       }
-      // console.log('Desctiption', item.description);
-      // console.log(item.description.indexOf(filter) );
       return (
         item.datetime.indexOf(filter) >= 0 ||
         item.description.indexOf(filter) >= 0 ||
