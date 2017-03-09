@@ -4,6 +4,8 @@ const globalHooks = require('../../../hooks');
 const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 
+const queryAllOrWithCurrentUser = require('./queryAllOrWithCurrentUser');
+
 exports.before = {
   all: [
     auth.verifyToken(),
@@ -11,7 +13,7 @@ exports.before = {
     auth.restrictToAuthenticated(),
   ],
   find: [
-    auth.queryWithCurrentUser(),
+    queryAllOrWithCurrentUser(), // all expenses if ?all=true && isAdmin, or else only the current user's expenses
   ],
   get: [
     auth.restrictToRoles({
