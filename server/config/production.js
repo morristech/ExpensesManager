@@ -1,12 +1,12 @@
-{
-  "host": "toptal-server-app.feathersjs.com",
-  "port": 80,
-  "postgres": "DATABASE_URL",
+module.exports = {
+  "host": "expenses-server.herokuapp.com",
+  "port": process.env.PORT || 80,
+  "postgres": process.env.DATABASE_URL,
   "public": "../public/",
   "auth": {
     "idField": "id",
     "token": {
-      "secret": "FEATHERS_AUTH_SECRET"
+      "secret": process.env.AUTH_SECRET
     },
     "local": {},
     "facebook": {
