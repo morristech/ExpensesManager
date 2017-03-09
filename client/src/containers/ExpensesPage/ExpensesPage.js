@@ -33,7 +33,7 @@ class ExpensesPage extends React.Component {
 
     // The next few lines generate a derived expenses array with expenses grouped by week with their week sum
     // First, all expenses grouped by week
-    const expensesByWeek = _.groupBy(expenses, item => moment(item.datetime).startOf('isoWeek'));
+    const expensesByWeek = _.groupBy(expenses, item => moment(item.datetime).startOf('isoWeek')); // TODO Deprecation warning in console
     // Next we calculate sum and average of each week and return a nice array
     const expensesDerived = Object.keys(expensesByWeek).map(week => {
       let sum = 0;
