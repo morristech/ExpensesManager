@@ -9,14 +9,18 @@ const feathers = require('feathers');
 const configuration = require('feathers-configuration');
 const hooks = require('feathers-hooks');
 const rest = require('feathers-rest');
+const seeder = require('feathers-seeder');
 const bodyParser = require('body-parser');
 
 const middleware = require('./middleware');
 const services = require('./services');
+const seedConfig = require('../config/seed');
 
 const app = feathers();
 
 app.configure(configuration(path.join(__dirname, '..')));
+
+app.configure(seeder(seedConfig));
 
 app.use(compress())
   .options('*', cors())
