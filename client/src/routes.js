@@ -8,12 +8,20 @@ import RegisterPage from './containers/RegisterPage/RegisterPage';
 import ExpensesPage from './containers/ExpensesPage/ExpensesPageContainer';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
-export default (
+const requireAuth = store => (nextState, replace) => {
+  if (!store.getState().auth.isLoggedIn) {
+    replace({
+      pathname: '/login',
+    });
+  }
+};
+
+export default store => (
   <Route path="/" component={App}>
-    <IndexRoute component={HomePage}/>
-    <Route path="login" component={LoginPage}/>
-    <Route path="register" component={RegisterPage}/>
-    <Route path="expenses" component={ExpensesPage}/>
-    <Route path="*" component={NotFoundPage}/>
+    <IndexRoute component={HomePage} />
+    <Route path="login" component={LoginPage} />
+    <Route path="register" component={RegisterPage} />
+    <Route path="expenses" component={ExpensesPage} onEnter={requireAuth(store)}/>
+    <Route path="*" component={NotFoundPage} />
   </Route>
 );
