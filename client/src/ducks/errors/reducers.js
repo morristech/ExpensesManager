@@ -8,9 +8,10 @@ export default function errorsReducer(state = initialState, action) {
     return null;
   } else if (error && error.response) {
     // Print nicely the details of the errors' details if they exist
-    console.log(typeof error.response.errors);
     const errorDetails = (Array.isArray(error.response.errors)) ? `: ${error.response.errors.map(item => item.message).join(' - ')}` : '';
     return `${error.response.message}${errorDetails} [${error.response.code} ${error.response.name}]`;
+  } else if (error) {
+    return error.message || error;
   }
 
   return state;
