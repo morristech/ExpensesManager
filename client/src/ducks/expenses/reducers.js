@@ -51,7 +51,8 @@ export default function expensesReducer(state = initialState, action) {
     case types.FETCH_ALL_EXPENSES_FAILURE:
       return {
         ...state,
-        expenses: []
+        expenses: [],
+        isFetching: false,
       };
     default:
       return state;

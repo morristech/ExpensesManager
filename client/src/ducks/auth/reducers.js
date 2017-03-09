@@ -21,6 +21,12 @@ export default function expensesReducer(state = initialState, action) {
         isFetching: false,
         user: action.payload
       };
+    case types.LOGIN_FAILURE:
+    case types.REGISTER_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+      };
     case types.LOGOUT:
       return {
         ...state,
