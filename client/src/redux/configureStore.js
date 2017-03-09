@@ -32,7 +32,7 @@ function configureStoreProd(initialState) {
     applyMiddleware(...middlewares),
     // Save state to localStorage
     persistState('auth', {
-      slicer: paths => {
+      slicer: () => {
         return (state) => {
           const subset = {
             auth: {
@@ -41,7 +41,7 @@ function configureStoreProd(initialState) {
             }
           };
           return subset;
-        }
+        };
       }
     }),
     )
@@ -80,7 +80,7 @@ function configureStoreDev(initialState) {
 
     // Save state to localStorage
     persistState('auth', {
-      slicer: paths => {
+      slicer: () => {
         return (state) => {
           const subset = {
             auth: {
@@ -89,7 +89,7 @@ function configureStoreDev(initialState) {
             }
           };
           return subset;
-        }
+        };
       }
     }),
     )
