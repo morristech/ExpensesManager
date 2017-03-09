@@ -12,6 +12,7 @@ AdminPage.propTypes = {
   usersActions: PropTypes.object.isRequired,
   expenses: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
 const handleSubmit = (values, dispatch) => {
@@ -25,7 +26,8 @@ const handleSubmit = (values, dispatch) => {
 const mapStateToProps = state => {
   return {
     expenses: state.expenses,
-    users: state.users
+    users: state.users,
+    auth: state.auth,
   };
 };
 
