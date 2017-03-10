@@ -4,6 +4,7 @@ const hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
 
 const validationSchema = require('../validation');
+const assignToUser = require('./assignToUser');
 const queryAllOrWithCurrentUser = require('./queryAllOrWithCurrentUser');
 
 exports.before = {
@@ -22,7 +23,7 @@ exports.before = {
     }),
   ],
   create: [
-    auth.associateCurrentUser(), // TODO allow admins to create expenses for everyone
+    assignToUser(),
     hooks.validate(validationSchema.expense),
   ],
   update: [
