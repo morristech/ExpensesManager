@@ -11,7 +11,7 @@ export default function errorsReducer(state = initialState, action) {
     let errorDetails = '';
     if (Array.isArray(error.response.errors)) {
       errorDetails = `: ${error.response.errors.map(item => item.message).join(' - ')}`;
-    } else if (typeof error.response.errors === 'object') {
+    } else if (typeof error.response.errors === 'object' && error.response.errors !== null) {
       errorDetails = `: ${error.response.errors.message}`;
     }
     return `${error.response.message}${errorDetails} [${error.response.code} ${error.response.name}]`;
