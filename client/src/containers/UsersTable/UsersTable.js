@@ -99,6 +99,19 @@ class UsersTable extends React.Component {
                   required
                 />
                 <br />
+
+                <label>Confirm Password:</label>
+                <Field
+                  name="confirmPassword"
+                  component={({ input, label, type, meta: { touched, error, warning } }) => (
+                    <div>
+                      <input {...input} className="form-control" placeholder="Confirm Password" type={type}/>
+                      {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+                    </div>
+                  )}
+                  type="password"
+                />
+                <br />
               </div>}
 
               <label>Roles:</label>

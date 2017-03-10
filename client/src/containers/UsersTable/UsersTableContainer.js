@@ -42,6 +42,13 @@ function mapDispatchToProps(dispatch) {
 // http://redux-form.com/6.5.0/examples/selectingFormValues/
 const UsersForm = reduxForm({
   form: 'UsersForm',
+  validate: values => {
+    const errors = {};
+    if (values.password !== values.confirmPassword) {
+      errors.confirmPassword = 'Passwords must match.';
+    }
+    return errors;
+  },
   onSubmit: handleSubmit
 })(UsersTable);
 const selector = formValueSelector('UsersForm');
