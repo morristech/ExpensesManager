@@ -12,7 +12,7 @@ function* createExpenseSaga(action) {
     const token = yield select(state => state.auth.user.token);
     const response = yield call(ApiService, `expenses`, 'POST', action.payload, token);
     // Fetch all expenses to update table of expenses
-    yield put({ type: types.FETCH_EXPENSES_REQUEST });
+    // yield put({ type: types.FETCH_EXPENSES_REQUEST });
     yield put({ type: types.CREATE_EXPENSE_SUCCESS, payload: response });
   } catch (error) {
     yield put({ type: types.CREATE_EXPENSE_FAILURE, error });
@@ -56,7 +56,7 @@ function* updateExpenseSaga(action) {
     const token = yield select(state => state.auth.user.token);
     yield call(ApiService, `expenses/${action.payload.id}`, 'PATCH', action.payload.body, token);
     // Fetch all expenses to update table of expenses
-    yield put({ type: types.FETCH_EXPENSES_REQUEST });
+    // yield put({ type: types.FETCH_EXPENSES_REQUEST });
     yield put({ type: types.UPDATE_EXPENSE_SUCCESS });
   } catch (error) {
     yield put({ type: types.UPDATE_EXPENSE_FAILURE, error });
@@ -72,7 +72,7 @@ function* deleteExpenseSaga(action) {
     const token = yield select(state => state.auth.user.token);
     yield call(ApiService, `expenses/${action.payload}`, 'DELETE', null, token);
     // Fetch all expenses to update table of expenses
-    yield put({ type: types.FETCH_EXPENSES_REQUEST });
+    // yield put({ type: types.FETCH_EXPENSES_REQUEST });
     yield put({ type: types.DELETE_EXPENSE_SUCCESS });
   } catch (error) {
     yield put({ type: types.DELETE_EXPENSE_FAILURE, error });

@@ -16,6 +16,14 @@ class ExpensesTable extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    // Test if we just fetched some new expenses data
+    if (!(this.props.isFetching && !nextProps.isFetching)) {
+      return;
+    }
+    this.componentDidMount();
+  }
+
   render() {
     const { expenses, filter, showingModal, actions, isFetching, handleSubmit } = this.props;
 
@@ -165,7 +173,6 @@ class ExpensesTable extends React.Component {
                 component="input"
                 type="text"
                 placeholder="Comment"
-                required
               />
               <br />
 

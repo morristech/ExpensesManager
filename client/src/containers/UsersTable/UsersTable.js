@@ -79,7 +79,7 @@ class UsersTable extends React.Component {
                 name="email"
                 className="form-control"
                 component="input"
-                type="datetime"
+                type="email"
                 placeholder="Email"
                 required
               />

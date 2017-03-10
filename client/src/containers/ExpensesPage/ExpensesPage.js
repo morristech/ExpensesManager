@@ -3,7 +3,12 @@ import ExpensesTableContainer from '../ExpensesTable/ExpensesTableContainer';
 
 
 const ExpensesPage = () => {
-  return <ExpensesTableContainer />;
+  return (
+    <div>
+      <h2>My expenses</h2>
+      <ExpensesTableContainer />
+    </div>
+  );
 }
 
 ExpensesPage.propTypes = {
