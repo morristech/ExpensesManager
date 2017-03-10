@@ -1,13 +1,14 @@
 import types from './types';
 
-const createExpense = (datetime, description, comment, amount) => {
+const createExpense = (datetime, description, comment, amount, userId) => {
   return {
     type: types.CREATE_EXPENSE_REQUEST,
     payload: {
       datetime,
       description,
       comment,
-      amount
+      amount,
+      userId,
     }
   };
 };
@@ -18,7 +19,7 @@ const fetchExpenses = () => {
   };
 };
 
-const updateExpense = (id, datetime, description, comment, amount) => {
+const updateExpense = (id, datetime, description, comment, amount, userId) => {
   return {
     type: types.UPDATE_EXPENSE_REQUEST,
     payload: {
@@ -27,7 +28,8 @@ const updateExpense = (id, datetime, description, comment, amount) => {
         datetime,
         description,
         comment,
-        amount
+        amount,
+        userId,
       }
     }
   };

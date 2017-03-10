@@ -32,14 +32,9 @@ class ExpensesTable extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Test if we just fetched some new expenses data
-    if (!(this.props.expenses.expenses.isFetching && !nextProps.expenses.expenses.isFetching)) {
-      return;
+    if (this.props.expenses.isFetching !== nextProps.expenses.isFetching) {
+      this.componentDidMount();
     }
-    // Test if we just deleted some users or not
-    if (this.props.users.users.length === nextProps.users.users.length) {
-      return;
-    }
-    this.componentDidMount();
   }
 
   render() {

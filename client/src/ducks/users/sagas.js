@@ -1,6 +1,7 @@
 import { select, call, put, takeLatest } from 'redux-saga/effects';
 
 import types from './types';
+import expensesTypes from '../expenses/types';
 import ApiService from '../../services/ApiService';
 
 /**
@@ -59,6 +60,11 @@ function* deleteUserSaga(action) {
     yield call(ApiService, `Users/${action.payload}`, 'DELETE', null, token);
     // Fetch all Users to update table of Users
     yield put({ type: types.FETCH_USERS_REQUEST });
+    // if admin, we also refetch all the expenses in the AdminPage
+    const roles = yield select(state => state.auth.user.data.roles);
+    if (roles.indexOf('admin') >= 0) {
+      yield put({ type: expensesTypes.FETCH_ALL_EXPENSES_REQUEST });
+    }
     yield put({ type: types.DELETE_USER_SUCCESS });
   } catch (error) {
     yield put({ type: types.DELETE_USER_FAILURE, error });
