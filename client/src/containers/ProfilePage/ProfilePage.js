@@ -5,46 +5,23 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
-import { authActions } from '../../ducks/auth';
+import { usersActions } from '../../ducks/users';
 
 function handleSubmit(values, dispatch) {
-  return dispatch(authActions.registerRequest(values.email, values.password));
+  return dispatch(usersActions.updateUserPassword(null, values.password)); // null means updating the user himself
 }
 
-class RegisterPage extends React.Component {
-
-  componentWillMount() {
-    // Redirect if already logged in
-    if (this.props.auth.isLoggedIn) {
-      this.props.handleRedirect();
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // Redirect if already logged in
-    if (nextProps.auth.isLoggedIn) {
-      this.props.handleRedirect();
-    }
-  }
+class ProfilePage extends React.Component {
 
   render() {
-    const { handleSubmit, auth } = this.props;
+    const { handleSubmit, auth, users } = this.props;
     return (
       <div className="container">
         <form
           className="col-md-6 col-md-offset-3 text-center"
           onSubmit={e => {e.preventDefault(); handleSubmit(e);}}
         >
-          <h2>Register</h2>
-          <Field
-            name="email"
-            className="form-control"
-            component="input"
-            type="email"
-            placeholder="Email"
-            required
-          />
-          <br />
+          <h2>Change password</h2>
 
           <Field
             name="password"
@@ -71,10 +48,10 @@ class RegisterPage extends React.Component {
           <div>
             <Button
               className="btn-lg"
-              disabled={auth.isFetching}
+              disabled={users.isFetching}
               type="submit"
             >
-              {auth.isFetching ? 'Registrating...' : 'Register'}
+              {users.isFetching ? 'Registrating...' : 'Register'}
             </Button>
           </div>
 
@@ -84,22 +61,21 @@ class RegisterPage extends React.Component {
   }
 }
 
-RegisterPage.propTypes = {
+ProfilePage.propTypes = {
   actions: React.PropTypes.object.isRequired,
   auth: React.PropTypes.object.isRequired,
+  users: React.PropTypes.object.isRequired,
   handleRedirect: React.PropTypes.func.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
+  users: state.users
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  actions: bindActionCreators(authActions, dispatch),
-  handleRedirect: () => {
-    dispatch(push(ownProps.redirectTo || '/dashboard'));
-  }
+  actions: bindActionCreators(usersActions, dispatch)
 });
 
 // decorate with redux
@@ -109,7 +85,7 @@ export default connect(
 )(
   // decorate react component with redux-form
   reduxForm({
-    form: 'RegisterForm',
+    form: 'ChangePasswordForm',
     validate: values => {
       const errors = {};
       if (values.password !== values.confirmPassword) {
@@ -118,5 +94,5 @@ export default connect(
       return errors;
     },
     onSubmit: handleSubmit
-  })(RegisterPage)
+  })(ProfilePage)
 );

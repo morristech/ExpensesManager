@@ -30,6 +30,19 @@ const updateUser = (id, email, roles) => {
   };
 };
 
+// variant of updateUser, only change password
+const updateUserPassword = (id, password) => {
+  return {
+    type: types.UPDATE_USER_REQUEST,
+    payload: {
+      id,
+      body: {
+        password
+      }
+    }
+  };
+};
+
 const deleteUser = userId => {
   return {
     type: types.DELETE_USER_REQUEST,
@@ -53,6 +66,7 @@ export default {
   createUser,
   fetchUsers,
   updateUser,
+  updateUserPassword,
   deleteUser,
   showModal,
   hideModal,

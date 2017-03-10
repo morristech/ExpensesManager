@@ -21,7 +21,7 @@ const TopBar = ({ auth, logout }) => {
       {auth.isLoggedIn ?
         <Nav pullRight>
           <NavDropdown eventKey={3} title={auth.user.data.email} id="profile-nav-dropdown">
-            <li><Link to="/profile">Profile</Link></li>
+            <MenuItem href="/profile">Profile</MenuItem>
             <MenuItem divider />
             <MenuItem eventKey={3.3} onClick={logout}>Logout</MenuItem>
           </NavDropdown>

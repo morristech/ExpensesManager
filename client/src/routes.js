@@ -7,6 +7,7 @@ import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import AdminPage from './containers/AdminPage/AdminPageContainer';
+import ProfilePage from './containers/ProfilePage/ProfilePage';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 const requireAuth = store => (nextState, replace) => {
@@ -39,6 +40,7 @@ const getRoutes = store => (
     <Route path="login" component={LoginPage} />
     <Route path="register" component={RegisterPage} />
     <Route path="dashboard" component={Dashboard} onEnter={requireAuth(store)}/>
+    <Route path="profile" component={ProfilePage} onEnter={requireAuth(store)}/>
     <Route path="admin" component={AdminPage} onEnter={requireAdmin(store)}/>
     <Route path="*" component={NotFoundPage} />
   </Route>

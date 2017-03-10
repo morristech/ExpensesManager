@@ -41,7 +41,8 @@ function* fetchUsersSaga() {
 function* updateUserSaga(action) {
   try {
     const token = yield select(state => state.auth.user.token);
-    yield call(ApiService, `Users/${action.payload.id}`, 'PATCH', action.payload.body, token);
+    const id = yield select(state => state.auth.user.data.id); // in case action.payload.id is null, then update current user
+    yield call(ApiService, `users/${action.payload.id || id}`, 'PATCH', action.payload.body, token);
     // Fetch all Users to update table of Users
     yield put({ type: types.FETCH_USERS_REQUEST });
     yield put({ type: types.UPDATE_USER_SUCCESS });
@@ -57,7 +58,7 @@ function* updateUserSaga(action) {
 function* deleteUserSaga(action) {
   try {
     const token = yield select(state => state.auth.user.token);
-    yield call(ApiService, `Users/${action.payload}`, 'DELETE', null, token);
+    yield call(ApiService, `users/${action.payload}`, 'DELETE', null, token);
     // Fetch all Users to update table of Users
     yield put({ type: types.FETCH_USERS_REQUEST });
     // if admin, we also refetch all the expenses in the AdminPage
