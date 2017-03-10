@@ -9,7 +9,7 @@ const Dashboard = () => {
       <ExpensesTableContainer />
     </div>
   );
-}
+};
 
 Dashboard.propTypes = {
 };

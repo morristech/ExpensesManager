@@ -6,19 +6,6 @@ import 'react-datetime/css/react-datetime.css';
 import moment from 'moment';
 import _ from 'lodash';
 
-
-/**
- * Render a select input with all users as options
- */
-const renderUsersList = ({input, options, meta: {touched, error}}) => (
-  <select className='form-control' {...input}>
-      <option></option>
-    {options.map(option =>
-      <option key={option.id} value={option.id}>{option.email}</option>
-    )}
-  </select>
-);
-
 class ExpensesTable extends React.Component {
 
   componentDidMount() {
@@ -50,7 +37,6 @@ class ExpensesTable extends React.Component {
         return true;
       }
       const lowercaseFilter = expenses.filter.toLowerCase();
-      console.log(item)
       return (
         moment(item.datetime).format('MMMM Do YYYY, h:mm a').toLowerCase().indexOf(lowercaseFilter) >= 0 ||
         item.description.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
@@ -159,7 +145,14 @@ class ExpensesTable extends React.Component {
                 <Field
                   name="userId"
                   className="form-control"
-                  component={renderUsersList}
+                  component={({input, options}) => (
+                    <select className="form-control" {...input}>
+                        <option />
+                      {options.map(option =>
+                        <option key={option.id} value={option.id}>{option.email}</option>
+                      )}
+                    </select>
+                  )}
                   type="number"
                   placeholder="User"
                   options={this.props.users.users}
@@ -236,8 +229,12 @@ class ExpensesTable extends React.Component {
 }
 
 ExpensesTable.propTypes = {
+  input: React.PropTypes.object,
+  options: React.PropTypes.array,
+  meta: React.PropTypes.object,
   allExpenses: React.PropTypes.bool,
   expensesActions: React.PropTypes.object.isRequired,
+  usersActions: React.PropTypes.object.isRequired,
   expenses: React.PropTypes.object.isRequired,
   users: React.PropTypes.object.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,

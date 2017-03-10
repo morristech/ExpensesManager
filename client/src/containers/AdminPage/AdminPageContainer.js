@@ -7,8 +7,6 @@ import AdminPage from './AdminPage';
 
 const mapStateToProps = state => {
   return {
-    expenses: state.expenses,
-    users: state.users,
     auth: state.auth,
   };
 };

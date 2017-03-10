@@ -19,7 +19,7 @@ const mapStateToProps = state => {
     expenses: state.expenses,
     users: state.users,
   };
-}
+};
 
 function mapDispatchToProps(dispatch) {
   return {

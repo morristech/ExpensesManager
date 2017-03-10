@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
 
 const TopBar = ({ auth, logout }) => {
   return (

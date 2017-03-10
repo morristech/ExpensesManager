@@ -1,6 +1,4 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
-import moment from 'moment';
 
 import ExpensesTable from '../ExpensesTable/ExpensesTableContainer';
 import UsersTable from '../UsersTable/UsersTableContainer';
@@ -16,7 +14,7 @@ class AdminPage extends React.Component {
   }
 
   render() {
-    const { expenses, users, auth } = this.props;
+    const { auth } = this.props;
 
     return (
       <div>
@@ -33,8 +31,6 @@ class AdminPage extends React.Component {
 }
 
 AdminPage.propTypes = {
-  expenses: React.PropTypes.object.isRequired,
-  users: React.PropTypes.object.isRequired,
   auth: React.PropTypes.object.isRequired,
   expensesActions: React.PropTypes.object.isRequired,
   usersActions: React.PropTypes.object.isRequired,

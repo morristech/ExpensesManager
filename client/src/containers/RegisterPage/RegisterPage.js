@@ -60,7 +60,7 @@ class RegisterPage extends React.Component {
             name="confirmPassword"
             component={({ input, label, type, meta: { touched, error, warning } }) => (
               <div>
-                <input {...input} className="form-control" placeholder="Confirm Password" type={type}/>
+                <input {...input} className="form-control" placeholder="Confirm Password" type={type} label={label}/>
                 {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
               </div>
             )}

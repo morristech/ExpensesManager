@@ -1,7 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
-import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
@@ -14,7 +13,7 @@ function handleSubmit(values, dispatch) {
 class ProfilePage extends React.Component {
 
   render() {
-    const { handleSubmit, auth, users } = this.props;
+    const { handleSubmit, users } = this.props;
     return (
       <div className="container">
         <form
@@ -37,7 +36,7 @@ class ProfilePage extends React.Component {
             name="confirmPassword"
             component={({ input, label, type, meta: { touched, error, warning } }) => (
               <div>
-                <input {...input} className="form-control" placeholder="Confirm Password" type={type}/>
+                <input {...input} className="form-control" placeholder="Confirm Password" type={type} label={label}/>
                 {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
               </div>
             )}
@@ -63,18 +62,16 @@ class ProfilePage extends React.Component {
 
 ProfilePage.propTypes = {
   actions: React.PropTypes.object.isRequired,
-  auth: React.PropTypes.object.isRequired,
   users: React.PropTypes.object.isRequired,
   handleRedirect: React.PropTypes.func.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
   users: state.users
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(usersActions, dispatch)
 });
 

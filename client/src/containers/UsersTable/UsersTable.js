@@ -1,21 +1,7 @@
 import React from 'react';
-import { Table, Button, Modal, Tabs, Tab } from 'react-bootstrap';
+import { Table, Button, Modal } from 'react-bootstrap';
 import { Field, initialize } from 'redux-form';
-import DateTime from 'react-datetime';
-import 'react-datetime/css/react-datetime.css';
 import moment from 'moment';
-import _ from 'lodash';
-
-/**
- * Render a select input with the roles as options
- */
-const renderRolesList = ({input, options, meta: {touched, error}}) => (
-  <select className='form-control' {...input}>
-    {options.map(option =>
-      <option key={option} value={option}>{option}</option>
-    )}
-  </select>
-);
 
 class UsersTable extends React.Component {
 
@@ -105,7 +91,7 @@ class UsersTable extends React.Component {
                   name="confirmPassword"
                   component={({ input, label, type, meta: { touched, error, warning } }) => (
                     <div>
-                      <input {...input} className="form-control" placeholder="Confirm Password" type={type}/>
+                      <input {...input} className="form-control" placeholder="Confirm Password" type={type} label={label}/>
                       {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
                     </div>
                   )}
@@ -117,7 +103,13 @@ class UsersTable extends React.Component {
               <label>Roles:</label>
               <Field
                 name="roles"
-                component={renderRolesList}
+                component={({input, options}) => (
+                  <select className="form-control" {...input}>
+                    {options.map(option =>
+                      <option key={option} value={option}>{option}</option>
+                    )}
+                  </select>
+                )}
                 options={['User', 'Manager', 'Admin']}
               />
               <br />
@@ -142,6 +134,10 @@ class UsersTable extends React.Component {
 }
 
 UsersTable.propTypes = {
+  input: React.PropTypes.object,
+  options: React.PropTypes.array,
+  meta: React.PropTypes.object,
+  hasId: React.PropTypes.bool,
   actions: React.PropTypes.object.isRequired,
   users: React.PropTypes.array.isRequired,
   isFetching: React.PropTypes.bool.isRequired,
