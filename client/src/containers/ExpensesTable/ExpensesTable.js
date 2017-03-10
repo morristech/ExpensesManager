@@ -115,7 +115,7 @@ class ExpensesTable extends React.Component {
               <tbody>
                 {expensesDerived.map(item =>
                   <tr key={item.week}>
-                    <td>Week of {moment(item.week).format('MMMM Do YYYY')}</td>
+                    <td>Week of Monday {moment(item.week).format('MMMM Do YYYY')}</td>
                     <td>${item.sum.toFixed(2)}</td>
                     <td>${(item.sum / 7).toFixed(2)}</td>
                   </tr>
