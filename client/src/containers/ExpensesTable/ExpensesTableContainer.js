@@ -8,9 +8,9 @@ import ExpensesTable from './ExpensesTable';
 
 const handleSubmit = (values, dispatch) => {
   if (values.id) {
-    dispatch(expensesActions.updateExpense(values.id, values.datetime, values.description, values.comment, values.amount));
+    dispatch(expensesActions.updateExpense(values.id, values.datetime, values.description, values.comment, values.amount, values.userId));
   } else {
-    dispatch(expensesActions.createExpense(values.datetime, values.description, values.comment, values.amount));
+    dispatch(expensesActions.createExpense(values.datetime, values.description, values.comment, values.amount, values.userId));
   }
 };
 
