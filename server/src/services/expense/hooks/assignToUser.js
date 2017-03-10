@@ -20,7 +20,7 @@ const queryAllOrWithCurrentUser = (options = {}) => {
       }
     }
     // Else we change it with CurrentUser's id
-    return auth.queryWithCurrentUser().call(this, hook);
+    return auth.associateCurrentUser().call(this, hook);
   };
 };
 

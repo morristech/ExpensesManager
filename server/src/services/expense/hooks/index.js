@@ -23,7 +23,7 @@ exports.before = {
     }),
   ],
   create: [
-    assignToUser(),
+    assignToUser(), // to currentUser is not admin, or to userId if admin && userId defined
     hooks.validate(validationSchema.expense),
   ],
   update: [
