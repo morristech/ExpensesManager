@@ -10,16 +10,22 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize) {
   const expense = sequelize.define('expenses', {
     amount: {
-      type: Sequelize.STRING,
-      allowNull: false
+      type: Sequelize.NUMERIC(4, 2), // two decimals
+      allowNull: false,
+      validate: {
+        min: 0
+      }
     },
     datetime: {
       type: Sequelize.DATE,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isDate: true,
+      }
     },
     description: {
       type: Sequelize.TEXT,
-      allowNull: true
+      allowNull: false
     },
     comment: {
       type: Sequelize.TEXT,

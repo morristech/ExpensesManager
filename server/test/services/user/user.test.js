@@ -6,7 +6,7 @@ const app = require('../../../src/app');
 
 let token;
 let user;
-describe('user service', function() {
+describe('user service for a User', function() {
   before(function(done) {
     this.server = app.listen(3030);
     this.server.once('listening', () => {
