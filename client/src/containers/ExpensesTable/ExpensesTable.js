@@ -82,7 +82,7 @@ class ExpensesTable extends React.Component {
                     <td>{moment(item.datetime).format('MMMM Do YYYY, h:mm a')}</td>
                     <td>{item.description}</td>
                     <td>{item.comment}</td>
-                    <td>${item.amount}</td>
+                    <td>${Number(item.amount).toFixed(2)}</td>
                     <td>
                       <Button className="btn-xs" onClick={() => { this.props.dispatch(initialize('ExpensesForm', item)); actions.showModal();}}>Edit</Button>
                       <Button className="btn-xs" onClick={() => actions.deleteExpense(item.id)}>Delete</Button>
@@ -116,7 +116,7 @@ class ExpensesTable extends React.Component {
                 {expensesDerived.map(item =>
                   <tr key={item.week}>
                     <td>Week of {moment(item.week).format('MMMM Do YYYY')}</td>
-                    <td>${item.sum}</td>
+                    <td>${item.sum.toFixed(2)}</td>
                     <td>${(item.sum / 7).toFixed(2)}</td>
                   </tr>
                 )}
@@ -182,6 +182,8 @@ class ExpensesTable extends React.Component {
                 className="form-control"
                 component="input"
                 type="number"
+                min="0"
+                step="0.01"
                 placeholder="Amount in dollars"
                 required
               />

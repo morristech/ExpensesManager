@@ -28,7 +28,7 @@ export default function expensesReducer(state = initialState, action) {
     case types.DELETE_EXPENSE_FAILURE:
       return {
         ...state,
-        isFetching: true,
+        isFetching: false,
       };
     case types.FETCH_EXPENSES_REQUEST:
     case types.FETCH_ALL_EXPENSES_REQUEST:
