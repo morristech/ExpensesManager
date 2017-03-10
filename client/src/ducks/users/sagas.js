@@ -25,7 +25,7 @@ function* createUserSaga(action) {
 function* fetchUsersSaga() {
   try {
     const token = yield select(state => state.auth.user.token);
-    const response = yield call(ApiService, `users?$limit=20`, 'GET', null, token);
+    const response = yield call(ApiService, `users`, 'GET', null, token);
     yield put({ type: types.FETCH_USERS_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: types.FETCH_USERS_FAILURE, error });

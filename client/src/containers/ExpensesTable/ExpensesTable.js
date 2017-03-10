@@ -6,26 +6,44 @@ import 'react-datetime/css/react-datetime.css';
 import moment from 'moment';
 import _ from 'lodash';
 
+
+/**
+ * Render a select input with all users as options
+ */
+const renderUsersList = ({input, options, meta: {touched, error}}) => (
+  <select className='form-control' {...input}>
+      <option></option>
+    {options.map(option =>
+      <option key={option.id} value={option.id}>{option.email}</option>
+    )}
+  </select>
+);
+
 class ExpensesTable extends React.Component {
 
   componentDidMount() {
     if (this.props.allExpenses) {
-      this.props.actions.fetchAllExpenses();
+      this.props.expensesActions.fetchAllExpenses();
+      this.props.usersActions.fetchUsers(); // for creating a new expense and assigning to a user
     } else {
-      this.props.actions.fetchExpenses();
+      this.props.expensesActions.fetchExpenses();
     }
   }
 
   componentWillReceiveProps(nextProps) {
     // Test if we just fetched some new expenses data
-    if (!(this.props.isFetching && !nextProps.isFetching)) {
+    if (!(this.props.expenses.expenses.isFetching && !nextProps.expenses.expenses.isFetching)) {
+      return;
+    }
+    // Test if we just deleted some users or not
+    if (this.props.users.users.length === nextProps.users.users.length) {
       return;
     }
     this.componentDidMount();
   }
 
   render() {
-    const { expenses, filter, showingModal, actions, isFetching, handleSubmit } = this.props;
+    const { expenses, expensesActions, handleSubmit } = this.props;
 
     /**
      * Helper function to filter the expenses matching the string filter
@@ -33,10 +51,10 @@ class ExpensesTable extends React.Component {
      * @return {array}       The resulting filtered array
      */
     const filterItems = item => {
-      if (!filter) {
+      if (!expenses.filter) {
         return true;
       }
-      const lowercaseFilter = filter.toLowerCase();
+      const lowercaseFilter = expenses.filter.toLowerCase();
       return (
         moment(item.datetime).format('MMMM Do YYYY, h:mm a').toLowerCase().indexOf(lowercaseFilter) >= 0 ||
         item.description.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
@@ -76,7 +94,7 @@ class ExpensesTable extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {expenses.filter(filterItems).map(item =>
+                {expenses.expenses.filter(filterItems).map(item =>
                   <tr key={item.id}>
                     {this.props.allExpenses && <td>{item.userId}</td>}
                     <td>{moment(item.datetime).format('MMMM Do YYYY, h:mm a')}</td>
@@ -84,8 +102,8 @@ class ExpensesTable extends React.Component {
                     <td>{item.comment}</td>
                     <td>${Number(item.amount).toFixed(2)}</td>
                     <td>
-                      <Button className="btn-xs" onClick={() => { this.props.dispatch(initialize('ExpensesForm', item)); actions.showModal();}}>Edit</Button>
-                      <Button className="btn-xs" onClick={() => actions.deleteExpense(item.id)}>Delete</Button>
+                      <Button className="btn-xs" onClick={() => { this.props.dispatch(initialize('ExpensesForm', item)); expensesActions.showModal();}}>Edit</Button>
+                      <Button className="btn-xs" onClick={() => expensesActions.deleteExpense(item.id)}>Delete</Button>
                     </td>
                   </tr>
                 )}
@@ -93,12 +111,12 @@ class ExpensesTable extends React.Component {
             </Table>
 
             <label>Filter expenses: </label>
-            <input value={filter} onChange={e => actions.setFilter(e.target.value)} />
+            <input value={expenses.filter} onChange={e => expensesActions.setFilter(e.target.value)} />
 
             <Button
               className="pull-right"
               bsStyle="primary"
-              onClick={() => { this.props.dispatch(initialize('ExpensesForm', {})); actions.showModal(); }}
+              onClick={() => { this.props.dispatch(initialize('ExpensesForm', {})); expensesActions.showModal(); }}
             >
               Add new expense
             </Button>
@@ -125,7 +143,7 @@ class ExpensesTable extends React.Component {
           </Tab>
         </Tabs>
 
-        <Modal show={showingModal} onHide={actions.hideModal}>
+        <Modal show={expenses.showingModal} onHide={expensesActions.hideModal}>
           <Modal.Header closeButton>
             <Modal.Title>Expense Information</Modal.Title>
           </Modal.Header>
@@ -139,6 +157,19 @@ class ExpensesTable extends React.Component {
                 type="hidden"
               />
               <br />
+
+              {this.props.allExpenses && <div>
+                <label>Assign to user (leave blank for self):</label>
+                <Field
+                  name="userId"
+                  className="form-control"
+                  component={renderUsersList}
+                  type="number"
+                  placeholder="User"
+                  options={this.props.users.users}
+                />
+                <br />
+              </div>}
 
               <label>Date:</label>
               <Field
@@ -193,10 +224,10 @@ class ExpensesTable extends React.Component {
                 <Button
                   bsStyle="primary"
                   className="btn-lg"
-                  disabled={isFetching}
+                  disabled={expenses.isFetching}
                   type="submit"
                 >
-                  {isFetching ? 'Updating...' : 'Submit'}
+                  {expenses.isFetching ? 'Updating...' : 'Submit'}
                 </Button>
               </div>
 
@@ -210,11 +241,9 @@ class ExpensesTable extends React.Component {
 
 ExpensesTable.propTypes = {
   allExpenses: React.PropTypes.bool,
-  actions: React.PropTypes.object.isRequired,
-  expenses: React.PropTypes.array.isRequired,
-  filter: React.PropTypes.string.isRequired,
-  isFetching: React.PropTypes.bool.isRequired,
-  showingModal: React.PropTypes.bool.isRequired,
+  expensesActions: React.PropTypes.object.isRequired,
+  expenses: React.PropTypes.object.isRequired,
+  users: React.PropTypes.object.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
   dispatch: React.PropTypes.func.isRequired,
 };

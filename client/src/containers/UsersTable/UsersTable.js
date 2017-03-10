@@ -6,13 +6,16 @@ import 'react-datetime/css/react-datetime.css';
 import moment from 'moment';
 import _ from 'lodash';
 
+/**
+ * Render a select input with the roles as options
+ */
 const renderRolesList = ({input, options, meta: {touched, error}}) => (
   <select className='form-control' {...input}>
     {options.map(option =>
       <option key={option} value={option}>{option}</option>
     )}
   </select>
-)
+);
 
 class UsersTable extends React.Component {
 

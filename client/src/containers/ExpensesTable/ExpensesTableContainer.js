@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import { expensesActions } from '../../ducks/expenses';
+import { usersActions } from '../../ducks/users';
 import ExpensesTable from './ExpensesTable';
 
 const handleSubmit = (values, dispatch) => {
@@ -13,11 +14,17 @@ const handleSubmit = (values, dispatch) => {
   }
 };
 
-const mapStateToProps = state => state.expenses;
+const mapStateToProps = state => {
+  return {
+    expenses: state.expenses,
+    users: state.users,
+  };
+}
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(expensesActions, dispatch)
+    expensesActions: bindActionCreators(expensesActions, dispatch),
+    usersActions: bindActionCreators(usersActions, dispatch)
   };
 }
 
