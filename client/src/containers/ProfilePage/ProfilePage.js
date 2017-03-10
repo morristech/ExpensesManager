@@ -3,14 +3,22 @@ import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { push } from 'react-router-redux';
 
 import { usersActions } from '../../ducks/users';
 
 function handleSubmit(values, dispatch) {
+  // redirect to dashboard after setting password
   return dispatch(usersActions.updateUserPassword(null, values.password)); // null means updating the user himself
 }
 
 class ProfilePage extends React.Component {
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.users.isFetching && !nextProps.users.isFetching) {
+      this.props.dispatch(push('/dashboard'));
+    }
+  }
 
   render() {
     const { handleSubmit, users } = this.props;
@@ -41,6 +49,7 @@ class ProfilePage extends React.Component {
               </div>
             )}
             type="password"
+            required
           />
           <br />
 

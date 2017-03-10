@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Nav, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Navbar, MenuItem} from 'react-bootstrap';
 
 const TopBar = ({ auth, logout }) => {
   return (
@@ -19,13 +19,10 @@ const TopBar = ({ auth, logout }) => {
         </ul>
       }
       {auth.isLoggedIn ?
-        <Nav pullRight>
-          <NavDropdown eventKey={3} title={auth.user.data.email} id="profile-nav-dropdown">
-            <MenuItem href="/profile">Profile</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey={3.3} onClick={logout}>Logout</MenuItem>
-          </NavDropdown>
-        </Nav>
+        <ul className="nav navbar-nav navbar-right">
+          <li><Link to="/Profile">{auth.user.data.email}</Link></li>
+          <MenuItem onClick={logout}>Logout</MenuItem>
+        </ul>
       :
         <ul className="nav navbar-nav navbar-right">
           <li><Link to="/register">Register</Link></li>
