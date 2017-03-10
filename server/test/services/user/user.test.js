@@ -117,5 +117,5 @@ describe('user service for a User', function() {
       assert.ok(bodyParsed.code === 403); // Forbidden
       done();
     });
-  })
+  });
 });
