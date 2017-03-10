@@ -1,4 +1,4 @@
-const RESET_ERROR = 'RESET_ERROR';
+const RESET_ERROR = 'toptal/errors/RESET_ERROR';
 
 export default {
   RESET_ERROR,

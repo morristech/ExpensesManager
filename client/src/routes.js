@@ -5,7 +5,7 @@ import App from './containers/App/App';
 import HomePage from './components/HomePage/HomePage';
 import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
-import ExpensesPage from './containers/ExpensesPage/ExpensesPageContainer';
+import ExpensesPage from './containers/ExpensesPage/ExpensesPage';
 import AdminPage from './containers/AdminPage/AdminPageContainer';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 

@@ -25,7 +25,7 @@ function* createExpenseSaga(action) {
 function* fetchExpensesSaga() {
   try {
     const token = yield select(state => state.auth.user.token);
-    const response = yield call(ApiService, `expenses`, 'GET', null, token);
+    const response = yield call(ApiService, `expenses?$limit=20`, 'GET', null, token);
     yield put({ type: types.FETCH_EXPENSES_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: types.FETCH_EXPENSES_FAILURE, error });
@@ -39,7 +39,7 @@ function* fetchExpensesSaga() {
 function* fetchAllExpensesSaga() {
   try {
     const token = yield select(state => state.auth.user.token);
-    const response = yield call(ApiService, `expenses?all=true`, 'GET', null, token);
+    const response = yield call(ApiService, `expenses?all=true&$limit=20`, 'GET', null, token);
     yield put({ type: types.FETCH_ALL_EXPENSES_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: types.FETCH_ALL_EXPENSES_FAILURE, error });

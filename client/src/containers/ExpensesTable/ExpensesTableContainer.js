@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import { expensesActions } from '../../ducks/expenses';
-import ExpensesPage from './ExpensesPage';
+import ExpensesTable from './ExpensesTable';
 
 const handleSubmit = (values, dispatch) => {
   if (values.id) {
@@ -29,5 +29,5 @@ export default connect(
   reduxForm({
     form: 'ExpensesForm',
     onSubmit: handleSubmit
-  })(ExpensesPage)
+  })(ExpensesTable)
 );

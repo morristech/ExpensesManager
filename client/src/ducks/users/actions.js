@@ -1,11 +1,59 @@
 import types from './types';
 
-const fetchAllUsers = () => {
+const createUser = (email, password, roles) => {
   return {
-    type: types.FETCH_ALL_USERS_REQUEST,
+    type: types.CREATE_USER_REQUEST,
+    payload: {
+      email,
+      password,
+      roles
+    }
+  };
+};
+
+const fetchUsers = () => {
+  return {
+    type: types.FETCH_USERS_REQUEST,
+  };
+};
+
+const updateUser = (id, email, roles) => {
+  return {
+    type: types.UPDATE_USER_REQUEST,
+    payload: {
+      id,
+      body: {
+        email,
+        roles
+      }
+    }
+  };
+};
+
+const deleteUser = userId => {
+  return {
+    type: types.DELETE_USER_REQUEST,
+    payload: userId,
+  };
+};
+
+const showModal = () => {
+  return {
+    type: types.SHOW_MODAL
+  };
+};
+
+const hideModal = () => {
+  return {
+    type: types.HIDE_MODAL
   };
 };
 
 export default {
-  fetchAllUsers,
+  createUser,
+  fetchUsers,
+  updateUser,
+  deleteUser,
+  showModal,
+  hideModal,
 };

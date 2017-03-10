@@ -2,6 +2,9 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import moment from 'moment';
 
+import ExpensesTable from '../ExpensesTable/ExpensesTableContainer';
+import UsersTable from '../UsersTable/UsersTableContainer';
+
 class AdminPage extends React.Component {
 
   componentDidMount() {
@@ -9,7 +12,7 @@ class AdminPage extends React.Component {
     if (this.props.auth.user.data.roles.indexOf('admin') >= 0) {
       this.props.expensesActions.fetchAllExpenses();
     }
-    this.props.usersActions.fetchAllUsers();
+    this.props.usersActions.fetchUsers();
   }
 
   render() {
@@ -19,51 +22,11 @@ class AdminPage extends React.Component {
       <div>
         {auth.user.data.roles.indexOf('admin') >= 0 && <div>
           <h2>All expenses</h2>
-          <Table striped bordered condensed hover>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Comment</th>
-                <th>Amount</th>
-                <th>UserId</th>
-              </tr>
-            </thead>
-            <tbody>
-              {expenses.expenses.map(item =>
-                <tr key={item.id}>
-                  <td>{moment(item.datetime).format('MMMM Do YYYY, h:mm a')}</td>
-                  <td>{item.description}</td>
-                  <td>{item.comment}</td>
-                  <td>${item.amount}</td>
-                  <td>{item.userId}</td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
+          <ExpensesTable allExpenses />
         </div>}
 
         <h2>All users</h2>
-        <Table striped bordered condensed hover>
-          <thead>
-            <tr>
-              <th>UserId</th>
-              <th>Email</th>
-              <th>Roles</th>
-              <th>Created At</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.users.map(item =>
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.email}</td>
-                <td>{item.roles.join(',')}</td>
-                <td>{item.createdAt}</td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
+        <UsersTable />
       </div>
     );
   }
