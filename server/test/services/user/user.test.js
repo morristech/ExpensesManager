@@ -4,25 +4,11 @@ const assert = require('assert');
 const request = require('request');
 const app = require('../../../src/app');
 
-let token;
-let user;
 describe('user service for a User', function() {
   before(function(done) {
     this.server = app.listen(3030);
     this.server.once('listening', () => {
-      request({
-        url: 'http://localhost:3030/auth/local',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: 'test@test.com', password: 'test'})
-      }, function(err, res, body) {
-        const bodyParsed = JSON.parse(body);
-        token = bodyParsed.token;
-        user = bodyParsed.data;
-        done();
-      });
+      done();
     });
   });
 
@@ -30,13 +16,27 @@ describe('user service for a User', function() {
     this.server.close(done);
   });
 
+  let token;
+  let user;
   it('registered the users service', () => {
     assert.ok(app.service('users'));
   });
 
   it('logins correctly for User', done => {
-    assert.ok(!!token);
-    done();
+    request({
+      url: 'http://localhost:3030/auth/local',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: 'test@test.com', password: 'testtest'})
+    }, function(err, res, body) {
+      const bodyParsed = JSON.parse(body);
+      token = bodyParsed.token;
+      user = bodyParsed.data;
+      assert.ok(!!token);
+      done();
+    });
   });
 
   let newExpenseId;
@@ -83,7 +83,7 @@ describe('user service for a User', function() {
       body: JSON.stringify({ amount: 15 })
     }, function(err, res, body) {
       const bodyParsed = JSON.parse(body);
-      assert.ok(bodyParsed.amount === '15');
+      assert.ok(bodyParsed.amount === 15);
       done();
     });
   });
@@ -98,14 +98,14 @@ describe('user service for a User', function() {
       }
     }, function(err, res, body) {
       const bodyParsed = JSON.parse(body);
-      assert.ok(bodyParsed.amount === '15');
+      assert.ok(bodyParsed.amount === 15);
       done();
     });
   });
 
   it('cannot modify another user', done => {
     request({
-      url: 'http://localhost:3030/users/6', // 6 is amaury.martiny@gmail.com
+      url: 'http://localhost:3030/users/3', // 6 is amaury.martiny@gmail.com
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
