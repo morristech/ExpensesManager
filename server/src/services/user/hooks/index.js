@@ -38,6 +38,7 @@ exports.before = {
       owner: true, // it should also allow owners regardless of their role
       ownerField: 'id'
     }),
+    hooks.validate(validationSchema.user),
   ],
   patch: [
     auth.verifyToken(),
@@ -48,6 +49,7 @@ exports.before = {
       owner: true, // it should also allow owners regardless of their role
       ownerField: 'id'
     }),
+    hooks.validate(validationSchema.user),
   ],
   remove: [
     auth.verifyToken(),
