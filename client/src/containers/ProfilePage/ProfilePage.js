@@ -63,7 +63,6 @@ class ProfilePage extends React.Component {
 ProfilePage.propTypes = {
   actions: React.PropTypes.object.isRequired,
   users: React.PropTypes.object.isRequired,
-  handleRedirect: React.PropTypes.func.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
 };
 
