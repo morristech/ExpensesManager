@@ -28,7 +28,7 @@ class RegisterPage extends React.Component {
   }
 
   render() {
-    const { handleSubmit, auth } = this.props;
+    const { touched, handleSubmit, error, auth } = this.props;
     return (
       <div className="container">
         <form
@@ -56,6 +56,18 @@ class RegisterPage extends React.Component {
           />
           <br />
 
+          <Field
+            name="confirmPassword"
+            component={({ input, label, type, meta: { touched, error, warning } }) => (
+              <div>
+                <input {...input} className="form-control" placeholder="Confirm Password" type={type}/>
+                {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+              </div>
+            )}
+            type="password"
+          />
+          <br />
+
           <div>
             <Button
               className="btn-lg"
@@ -79,7 +91,6 @@ RegisterPage.propTypes = {
   handleSubmit: React.PropTypes.func.isRequired,
 };
 
-
 const mapStateToProps = (state) => ({
   auth: state.auth
 });
@@ -91,6 +102,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 });
 
+const validate = values => {
+  const errors = {};
+  if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = 'Passwords must match.';
+  }
+  return errors;
+}
+
 // decorate with redux
 export default connect(
   mapStateToProps,
@@ -99,6 +118,7 @@ export default connect(
   // decorate react component with redux-form
   reduxForm({
     form: 'RegisterForm',
+    validate,
     onSubmit: handleSubmit
   })(RegisterPage)
 );

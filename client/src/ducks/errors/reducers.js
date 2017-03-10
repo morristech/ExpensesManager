@@ -15,6 +15,9 @@ export default function errorsReducer(state = initialState, action) {
       errorDetails = `: ${error.response.errors.message}`;
     }
     return `${error.response.message}${errorDetails} [${error.response.code} ${error.response.name}]`;
+  } else if (error === true) {
+    // happens with redux-form
+    return state;
   } else if (error) {
     return error.message || error;
   }
