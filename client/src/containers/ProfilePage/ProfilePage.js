@@ -50,7 +50,7 @@ class ProfilePage extends React.Component {
               disabled={users.isFetching}
               type="submit"
             >
-              {users.isFetching ? 'Registrating...' : 'Register'}
+              {users.isFetching ? 'Changing...' : 'Change'}
             </Button>
           </div>
 
