@@ -50,11 +50,12 @@ class ExpensesTable extends React.Component {
         return true;
       }
       const lowercaseFilter = expenses.filter.toLowerCase();
+      console.log(item)
       return (
         moment(item.datetime).format('MMMM Do YYYY, h:mm a').toLowerCase().indexOf(lowercaseFilter) >= 0 ||
         item.description.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
-        item.comment.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
-        item.amount.toLowerCase().indexOf(lowercaseFilter) >= 0
+        (item.comment || '').toLowerCase().indexOf(lowercaseFilter) >= 0 ||
+        item.amount.toString().toLowerCase().indexOf(lowercaseFilter) >= 0
       );
     };
 
