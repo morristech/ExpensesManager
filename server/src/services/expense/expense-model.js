@@ -10,7 +10,7 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize) {
   const expense = sequelize.define('expenses', {
     amount: {
-      type: Sequelize.NUMERIC(4, 2), // two decimals
+      type: Sequelize.FLOAT,
       allowNull: false,
       validate: {
         min: 0
