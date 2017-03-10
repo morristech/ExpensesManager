@@ -1,7 +1,9 @@
 'use strict';
 
-const hooks = require('feathers-hooks');
+const hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
+
+const validationSchema = require('../validation');
 
 exports.before = {
   all: [],
@@ -24,6 +26,7 @@ exports.before = {
     }),
   ],
   create: [
+    hooks.validate(validationSchema.user),
     auth.hashPassword()
   ],
   update: [
