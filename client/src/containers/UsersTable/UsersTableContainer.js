@@ -8,10 +8,10 @@ import UsersTable from './UsersTable';
 const handleSubmit = (values, dispatch) => {
   let roles;
   switch (values.roles) {
-    case 'admin':
+    case 'Admin':
       roles = ['user', 'manager', 'admin'];
       break;
-    case 'manager':
+    case 'Manager':
       roles = ['user', 'manager'];
       break;
     default:

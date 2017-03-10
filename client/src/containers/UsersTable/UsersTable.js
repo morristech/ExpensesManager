@@ -40,7 +40,7 @@ class UsersTable extends React.Component {
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.email}</td>
-                <td>{item.roles.join(',')}</td>
+                <td>{item.roles.join(', ')}</td>
                 <td>{moment(item.createdAt).format('MMMM Do YYYY, h:mm a')}</td>
                 <td>
                   <Button className="btn-xs" onClick={() => { this.props.dispatch(initialize('UsersForm', item)); actions.showModal();}}>Edit</Button>
@@ -102,7 +102,7 @@ class UsersTable extends React.Component {
               <Field
                 name="roles"
                 component={renderRolesList}
-                options={['user', 'manager', 'admin']}
+                options={['User', 'Manager', 'Admin']}
               />
               <br />
 
