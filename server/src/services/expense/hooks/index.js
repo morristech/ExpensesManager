@@ -1,8 +1,9 @@
 'use strict';
 
-const hooks = require('feathers-hooks');
+const hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
 
+const validationSchema = require('../validation');
 const queryAllOrWithCurrentUser = require('./queryAllOrWithCurrentUser');
 
 exports.before = {
@@ -22,18 +23,21 @@ exports.before = {
   ],
   create: [
     auth.associateCurrentUser(), // TODO allow admins to create expenses for everyone
+    hooks.validate(validationSchema.expense),
   ],
   update: [
     auth.restrictToRoles({
       roles: ['admin'], // admins are allowed to access this resource
       owner: true, // it should also allow owners regardless of their role
     }),
+    hooks.validate(validationSchema.expense),
   ],
   patch: [
     auth.restrictToRoles({
       roles: ['admin'], // admins are allowed to access this resource
       owner: true, // it should also allow owners regardless of their role
     }),
+    hooks.validate(validationSchema.expense),
   ],
   remove: [
     auth.restrictToRoles({

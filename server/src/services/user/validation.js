@@ -1,5 +1,5 @@
 const checkPassword = (password, errors) => {
-  if (!/^[\\sa-zA-Z]{8,30}$/.test((password || '').trim())) {
+  if (!/^[\\sa-zA-Z]{8,30}$/.test((password).trim())) {
     errors['message'] = 'Password must be 8 or more letters or spaces.';
   }
 };
