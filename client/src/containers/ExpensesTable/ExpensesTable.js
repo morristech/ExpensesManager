@@ -32,7 +32,7 @@ class ExpensesTable extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Test if we just fetched some new expenses data
-    if (this.props.expenses.isFetching !== nextProps.expenses.isFetching) {
+    if (this.props.expenses.isFetching && !nextProps.expenses.isFetching) {
       this.componentDidMount();
     }
   }
