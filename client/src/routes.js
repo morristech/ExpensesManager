@@ -5,7 +5,7 @@ import App from './containers/App/App';
 import HomePage from './components/HomePage/HomePage';
 import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
-import ExpensesPage from './containers/ExpensesPage/ExpensesPage';
+import Dashboard from './components/Dashboard/Dashboard';
 import AdminPage from './containers/AdminPage/AdminPageContainer';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
@@ -38,7 +38,7 @@ const getRoutes = store => (
     <IndexRoute component={HomePage} />
     <Route path="login" component={LoginPage} />
     <Route path="register" component={RegisterPage} />
-    <Route path="dashboard" component={ExpensesPage} onEnter={requireAuth(store)}/>
+    <Route path="dashboard" component={Dashboard} onEnter={requireAuth(store)}/>
     <Route path="admin" component={AdminPage} onEnter={requireAdmin(store)}/>
     <Route path="*" component={NotFoundPage} />
   </Route>
